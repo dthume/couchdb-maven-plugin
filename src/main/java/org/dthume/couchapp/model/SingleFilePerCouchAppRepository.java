@@ -1,0 +1,118 @@
+/**
+ * Copyright (C) 2011 David Thomas Hume <dth at dthu.me>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.dthume.couchapp.model;
+
+import static org.apache.commons.io.FileUtils.listFiles;
+import static org.apache.commons.io.FileUtils.readFileToString;
+
+import static org.dthume.couchapp.model.CouchAppConstants.toId;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Collection;
+
+
+import org.apache.commons.io.IOUtils;
+import org.jcouchdb.document.DesignDocument;
+import org.svenson.JSON;
+import org.svenson.JSONParser;
+
+public class SingleFilePerCouchAppRepository
+	implements CouchAppRepository {
+	
+	public final static String DEFAULT_EXTENSION = ".json";
+	
+	private final File baseDir;
+	private final String[] extensions = new String[] { DEFAULT_EXTENSION };
+	
+	public SingleFilePerCouchAppRepository(File baseDir) {
+		this.baseDir = baseDir;
+	}
+
+	public Collection<String> listIds() {
+		final Collection<File> files = listFiles(baseDir, extensions, false); 
+		final Collection<String> names = new java.util.ArrayList<String>();
+		for (final File file : files)
+			names.add(toAppId(file));
+		return names;
+	}
+	
+	private String toAppId(final File file)
+	{
+		final String name = file.getName();
+		return name.substring(0, name.lastIndexOf('.'));
+	}
+
+	public DesignDocument create(DesignDocument app) {
+		return update(app);
+	}
+
+	public DesignDocument retrieve(String id) {
+		try {
+			return read(id);
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("error reading app with id: " + id, e);
+		}
+	}
+
+	public DesignDocument update(DesignDocument app) {
+		try {
+			write(app);
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("error writing app with id: " + toId(app), e);
+		}
+		return app;
+	}
+
+	public boolean delete(DesignDocument app) {
+		final String name = toId(app) + DEFAULT_EXTENSION;
+		return new File(baseDir, name).delete();
+	}
+	
+	private JSON getJSON() { return JSON.defaultJSON(); }
+	
+	private JSONParser getJSONParser() {
+		return JSONParser.defaultJSONParser();
+	}
+	
+	private DesignDocument read(final String id)
+		throws IOException {
+		final File file = new File(baseDir, id + DEFAULT_EXTENSION);
+		final String json = readFileToString(file);
+		final DesignDocument doc =
+				getJSONParser().parse(DesignDocument.class, json);
+		doc.setId("_design/" + id);
+		return doc;
+	}
+	
+	private void write(final DesignDocument app)
+		throws IOException {
+		baseDir.mkdirs();
+		final File file = new File(baseDir, toId(app) + DEFAULT_EXTENSION);
+		final Writer writer = new java.io.FileWriter(file);
+		try
+		{
+			getJSON().writeJSONToWriter(app, writer);
+		}
+		finally
+		{
+			if (null != writer) IOUtils.closeQuietly(writer);
+		}
+	}
+}

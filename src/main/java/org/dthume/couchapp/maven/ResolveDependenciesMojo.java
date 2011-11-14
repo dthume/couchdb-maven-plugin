@@ -23,33 +23,21 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.svenson.JSON;
 
 /**
- * Goal which gets a document from Couch DB
+ * Goal which expands include (// ! code) statements in couch app files
  *
  * @author dth
  *
- * @goal get-document
+ * @goal resolve-dependencies
  */
-public class GetDocumentMojo extends AbstractCouchMojo
+public class ResolveDependenciesMojo extends AbstractCouchMojo
 {
-    /**
-     * @parameter expression="${couchapp.documentId}"
-     * @required
-     */
-    private String documentId;
-    
-    /**
-     * @parameter expression="${couchapp.file}" default-value="-"
-     * @required
-     */
-    private String outputFile;
-	
     public void execute() throws MojoExecutionException
     {
     	try
     	{
     		executeInternal();
     	}
-    	catch (IOException e)
+    	catch (final IOException e)
     	{
     		throw new MojoExecutionException("Caught IOException during mojo execution", e);
     	}
@@ -57,29 +45,5 @@ public class GetDocumentMojo extends AbstractCouchMojo
     
     private void executeInternal() throws IOException
     {
-    	final PrintStream output = getOutputStream();
-    	final Object document = getDocument();
-    	
-    	writeJSON(document, output);
-    }
-    
-    private Object getDocument()
-    {
-    	return getDatabase().getDocument(Map.class, documentId);
-    }
-    
-    private PrintStream getOutputStream() throws IOException
-    {
-    	return "-".equals(outputFile) ?
-    			System.out : new PrintStream(outputFile);
-    }
-    
-    private void writeJSON(Object document, PrintStream output)
-    {
-    	output.println(
-        	JSON.formatJSON(
-        		JSON.defaultJSON().forValue(document)
-        	)
-        );
-    }
+    }    
 }
