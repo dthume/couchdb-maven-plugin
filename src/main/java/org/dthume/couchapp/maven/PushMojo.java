@@ -64,14 +64,17 @@ public class PushMojo extends AbstractCouchMojo
      */
     private String javascriptLibraryDirectory;
 	
-    /**
-     * @required
-     * @parameter expression = "${couchapp}"
-     */
-    private String application;
-    
     public void execute() throws MojoExecutionException
     {
+    	final File apps = new File(sourceDirectory);
+    	for (final File app : iterateDirectories(apps))
+    		updateApplication(app);
+    }
+    
+    private void updateApplication(final File application)
+    throws MojoExecutionException
+    {
+    	getLog().info("Updating application: " + application.getName());
     	try
     	{
     		new RequestHandler(application).handle();
@@ -80,15 +83,12 @@ public class PushMojo extends AbstractCouchMojo
     	{
     		throw new MojoExecutionException("Caught IOException while pushing application", e);
     	}
+
     }
     
-    private File getApplicationDirectory()
+    private DesignDocument getOrCreateDesignDocument(File dir)
     {
-    	return new File(sourceDirectory, application);
-    }
-    
-    private DesignDocument getOrCreateDesignDocument()
-    {
+    	final String application = dir.getName();
     	final DesignDocument design = new DesignDocument(application);
 		try
 		{
@@ -134,10 +134,10 @@ public class PushMojo extends AbstractCouchMojo
     	final File baseDir;
     	final DesignDocument design;
     	
-    	RequestHandler(String name)
+    	RequestHandler(File dir)
     	{
-    		baseDir = getApplicationDirectory();
-    		design = getOrCreateDesignDocument();
+    		baseDir = dir;
+    		design = getOrCreateDesignDocument(baseDir);
     	}
     	
     	void handle() throws IOException

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-set>
+	<components>
+		<component>
+			<role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+			<role-hint>couchapp</role-hint>
+			<implementation>
+				org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping
+			</implementation>
+			<configuration>
+				<phases>
+					<process-resources>
+						org.apache.maven.plugins:maven-resources-plugin:resources
+					</process-resources>
+					<compile>
+						org.apache.maven.plugins:maven-compiler-plugin:compile
+					</compile>
+					<deploy>
+					  org.dthume.couchapp:couchapp-maven-plugin:push
+					</deploy>
+				</phases>
+			</configuration>
+		</component>
+	</components>
+</component-set>
