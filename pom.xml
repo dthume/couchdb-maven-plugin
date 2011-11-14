@@ -12,13 +12,40 @@
   <packaging>maven-plugin</packaging>
 
   <name>Couchapp Maven Plugin</name>
-  
+  <url>https://github.com/dthume/couchapp-maven-plugin</url>
+
+  <description>
+    CouchApp...for Maven!
+  </description>
+
   <licenses>
   	<license>
   		<name>Apache</name>
   		<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
   	</license>
   </licenses>
+
+  <scm>
+    <connection>scm:git:git://github.com/dthume/couchapp-maven-plugin.git</connection>
+    <developerConnection>scm:git:https://dthume@github.com/dthume/couchapp-maven-plugin.git</developerConnection>
+    <url>https://github.com/dthume/couchapp-maven-plugin</url>
+  </scm>
+
+  <developers>
+     <developer>
+      <id>dth</id>
+      <name>David Thomas Hume</name>
+      <email>dth@dthu.me</email>
+      <url>http://dthu.me</url>
+      <organization>Kana</organization>
+      <organizationUrl>http://www.kana.com</organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>0</timezone>
+    </developer>
+  </developers>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -75,31 +102,6 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.3</version>
-        <configuration>
-          <artifactItems>
-            <artifactItem>
-              <groupId>${project.groupId}</groupId>
-              <artifactId>${project.artifactId}</artifactId>
-              <version>${project.version}</version>
-              <type>${project.type}</type>
-              <overWrite>true</overWrite>
-              <outputDirectory>${basedir}/repository/${project.groupId}/${project.artifactId}/${project.version}</outputDirectory>
-            </artifactItem>
-            <artifactItem>
-              <groupId>${project.groupId}</groupId>
-              <artifactId>${project.artifactId}</artifactId>
-              <version>${project.version}</version>
-              <type>pom</type>
-              <overWrite>true</overWrite>
-              <outputDirectory>${basedir}/repository/${project.groupId}/${project.artifactId}/${project.version}</outputDirectory>
-            </artifactItem>
-          </artifactItems>
-        </configuration>
       </plugin>
     </plugins>
   </build>
