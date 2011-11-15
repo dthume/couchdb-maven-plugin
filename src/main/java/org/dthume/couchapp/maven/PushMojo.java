@@ -16,19 +16,15 @@
 package org.dthume.couchapp.maven;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.dthume.couchapp.model.CouchAppConstants.toId;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.apache.maven.plugin.MojoExecutionException;
 import org.dthume.couchapp.model.CouchAppRepository;
 import org.dthume.couchapp.model.CouchDBCouchAppRepository;
-import org.dthume.couchapp.model.FilesystemCouchAppRepository;
 import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
 import org.jcouchdb.document.DesignDocument;
 
 /**
- * Goal which pushes to Couch DB
+ * Goal which pushes one or more couch apps to Couch DB
  *
  * @author dth
  * 
@@ -37,49 +33,32 @@ import org.jcouchdb.document.DesignDocument;
  */
 public class PushMojo extends AbstractCouchMojo
 {
-    /**
-     * @required
-     * @parameter
-     *  expression = "${couchapp.packageDirectory}"
-     * 	default-value = "${project.build.directory}/couchapp/packages"
-     */
-    private String packageDirectory;    
-    
     private CouchAppRepository inputRepo;
     
     private CouchAppRepository outputRepo;
   
-    private void postConstruct()
+    protected void postConstruct()
     {
-    	final File dir = new File(packageDirectory);
-    	inputRepo = new SingleFilePerCouchAppRepository(dir);
-    	
+    	inputRepo = new SingleFilePerCouchAppRepository(packageDirectory);
     	outputRepo = new CouchDBCouchAppRepository(getDatabase());	
     }
-    
-    public void execute() throws MojoExecutionException
-    {
-    	postConstruct();
-    	
-    	for (final String app : inputRepo.listIds())
-    		updateApplication(app);
-    }
-    
-    private CouchAppRepository getInputRepo() { return inputRepo; }
-    
-    private void updateApplication(final String id)
-    throws MojoExecutionException
-    {
-    	getLog().info("Pushing application: " + id);
-    	
-    	final DesignDocument design = getInputRepo().retrieve(id);
-		final DesignDocument current = getOrCreateDesignDocument(id);
+        
+    @Override
+	protected CouchAppRepository getSourceRepo() { return inputRepo; }
+
+	@Override
+	protected CouchAppRepository getTargetRepo() { return outputRepo; }
+	
+	@Override
+	protected DesignDocument processInternal(DesignDocument design) {
+		final DesignDocument current =
+				getOrCreateDesignDocument(toId(design));
 		
 		if (!isBlank(current.getRevision()))
 			design.setRevision(current.getRevision());
 		
-		outputRepo.update(design);
-    }
+		return design;
+	}
     
     private DesignDocument getOrCreateDesignDocument(final String application)
     {

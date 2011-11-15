@@ -17,6 +17,8 @@ package org.dthume.couchapp.maven;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
 
+import static org.dthume.couchapp.model.CouchAppConstants.toId;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -30,7 +32,7 @@ import org.jcouchdb.document.DesignDocument;
 import org.jcouchdb.document.View;
 
 /**
- * Goal which expands include (!code) comments in couch app files
+ * Goal which expands include (!code [FILE]) comments in couch app files
  *
  * @author dth
  * 
@@ -38,73 +40,37 @@ import org.jcouchdb.document.View;
  */
 public class ExpandIncludesMojo extends AbstractCouchMojo
 {
-    /**
-     * @required
-     * @parameter
-     *  expression = "${couchapp.sourceDirectory}"
-     * 	default-value = "${basedir}/src/main/couchapp"
-     */
-    private String sourceDirectory;
-	
-    /**
-     * @required
-     * @parameter
-     *  expression = "${project.build.directory}/${project.build.finalName}"
-     */
-    private String webappDirectory;
-    
-    /**
-     * @required
-     * @parameter
-     *  expression = "${scripts}"
-     *  default-value = "scripts"
-     */
-    private String scriptsDirectory;
-    
-    /**
-     * @required
-     * @parameter
-     *  expression = "${couchapp.expandedSourcesDirectory}"
-     * 	default-value = "${project.build.directory}/couchapp/expanded"
-     */
-    private String expandedSourcesDirectory;
-    
     private CouchAppRepository inputRepo;
     private CouchAppRepository outputRepo;
     
-    private void postConstruct()
+    protected void postConstruct()
     {
     	inputRepo =
-    		new FilesystemCouchAppRepository(new File(sourceDirectory));
+    		new FilesystemCouchAppRepository(sourceDirectory);
     	outputRepo =
-    		new FilesystemCouchAppRepository(new File(expandedSourcesDirectory));
+    		new FilesystemCouchAppRepository(expandedSourcesDirectory);
     }
     
-    public void execute() throws MojoExecutionException
+    @Override
+	protected CouchAppRepository getSourceRepo() { return inputRepo; }
+    
+	@Override
+	protected CouchAppRepository getTargetRepo() { return outputRepo; }
+
+	@Override
+    protected DesignDocument processInternal(final DesignDocument doc)
+    	throws MojoExecutionException
     {
-    	postConstruct();
-    	
+		getLog().info("Expanding includes for app: " + toId(doc));
     	try
     	{
-    		executeInternal();
+    		expandAppIncludes(doc);
+    		return doc;
     	}
-    	catch (final IOException e)
+    	catch (IOException e)
     	{
-    		throw new MojoExecutionException("Caught IOException during mojo execution", e);
+    		throw new MojoExecutionException("Caught IOException while expanding includes", e);
     	}
-    }
-    
-    private void executeInternal() throws IOException
-    {
-    	for (final String app : inputRepo.listIds())
-    		expandAppIncludes(app);
-    }
-    
-    private void expandAppIncludes(final String app) throws IOException
-    {
-    	final DesignDocument doc = inputRepo.retrieve(app);
-    	expandAppIncludes(doc);
-    	outputRepo.update(doc);
     }
     
     private void expandAppIncludes(final DesignDocument doc)
@@ -115,7 +81,8 @@ public class ExpandIncludesMojo extends AbstractCouchMojo
     }
     
     private void expandIncludeReferences(final View view)
-    	throws IOException {
+    	throws IOException
+    {
     	view.setMap(expandIncludeReferences(view.getMap()));
     	view.setReduce(expandIncludeReferences(view.getReduce()));
     }

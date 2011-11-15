@@ -34,7 +34,8 @@
 					  org.dthume.couchapp:couchapp-maven-plugin:expand-includes
 					</compile>
 					<package>
-					  org.dthume.couchapp:couchapp-maven-plugin:package
+					  org.dthume.couchapp:couchapp-maven-plugin:package,
+					  org.dthume.couchapp:couchapp-maven-plugin:attach-artifacts
 					</package>
 					<install>
 					  org.apache.maven.plugins:maven-install-plugin:install

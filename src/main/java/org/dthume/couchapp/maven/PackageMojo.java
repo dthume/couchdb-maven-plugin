@@ -15,17 +15,13 @@
  */
 package org.dthume.couchapp.maven;
 
-import java.io.File;
-
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.project.MavenProject;
-import org.apache.maven.project.MavenProjectHelper;
 import org.dthume.couchapp.model.CouchAppRepository;
 import org.dthume.couchapp.model.FilesystemCouchAppRepository;
 import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
 
 /**
- * Goal which packages a couchapp in preparation for couch db
+ * Goal which packages a couchapp in preparation for deployment to couch db
+ * or an artifact repository.
  *
  * @author dth
  * 
@@ -33,67 +29,21 @@ import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
  */
 public class PackageMojo extends AbstractCouchMojo
 {
-    /**
-     * @required
-     * @parameter
-     *  expression = "${couchapp.expandedSourcesDirectory}"
-     * 	default-value = "${project.build.directory}/couchapp/expanded"
-     */
-    private File expandedSourcesDirectory;
-    
-    /**
-     * @required
-     * @parameter
-     *  expression = "${couchapp.packageDirectory}"
-     * 	default-value = "${project.build.directory}/couchapp/packages"
-     */
-    private File packageDirectory;
-    
-    /**
-     * @parameter expression="${project}"
-     * @required
-     * @readonly
-     */
-    private MavenProject project;
-    
-    /**
-     * @component
-     * @readonly
-     */
-    private MavenProjectHelper projectHelper;
-    
     private CouchAppRepository inputRepo;
     private SingleFilePerCouchAppRepository outputRepo;
-  
-    private void postConstruct()
+    
+    @Override
+	protected CouchAppRepository getSourceRepo() { return inputRepo; }
+
+	@Override
+	protected CouchAppRepository getTargetRepo() { return outputRepo; }
+
+	@Override
+	protected void postConstruct()
     {
     	inputRepo =
     		new FilesystemCouchAppRepository(expandedSourcesDirectory);
     	outputRepo =
         	new SingleFilePerCouchAppRepository(packageDirectory);
-    }
-    
-    public void execute() throws MojoExecutionException
-    {
-    	postConstruct();
-    	
-    	for (final String app : inputRepo.listIds())
-    	{
-    		updateApplication(app);
-    		attachArtifact(app);
-    	}
-    }
-    
-    private void updateApplication(final String id)
-    throws MojoExecutionException
-    {
-    	getLog().info("Packaging application: " + id);
-    	outputRepo.update(inputRepo.retrieve(id));
-    }
-    
-    private void attachArtifact(final String id)
-    {
-    	final File file = outputRepo.getFile(id);
-    	projectHelper.attachArtifact(project, "couchapp", id, file);
     }
 }

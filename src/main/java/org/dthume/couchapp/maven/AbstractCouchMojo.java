@@ -15,14 +15,19 @@
  */
 package org.dthume.couchapp.maven;
 
+import java.io.File;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.dthume.couchapp.model.CouchAppRepository;
 import org.jcouchdb.db.Database;
 import org.jcouchdb.db.Server;
 import org.jcouchdb.db.ServerImpl;
+import org.jcouchdb.document.DesignDocument;
 import org.svenson.JSON;
 
 public abstract class AbstractCouchMojo extends AbstractMojo
@@ -56,6 +61,73 @@ public abstract class AbstractCouchMojo extends AbstractMojo
      * @parameter expression="${couchapp.password}"
      */
     private String password;
+    
+    /**
+     * @required
+     * @parameter
+     *  expression = "${couchapp.sourceDirectory}"
+     * 	default-value = "${basedir}/src/main/couchapp"
+     */
+    protected File sourceDirectory;
+	
+    /**
+     * @required
+     * @parameter
+     *  expression = "${project.build.directory}/${project.build.finalName}"
+     */
+    protected File webappDirectory;
+    
+    /**
+     * @required
+     * @parameter
+     *  expression = "${scripts}"
+     *  default-value = "scripts"
+     */
+    protected String scriptsDirectory;
+    
+    /**
+     * @required
+     * @parameter
+     *  expression = "${couchapp.expandedSourcesDirectory}"
+     * 	default-value = "${project.build.directory}/couchapp/expanded"
+     */
+    protected File expandedSourcesDirectory;
+    
+    /**
+     * @required
+     * @parameter
+     *  expression = "${couchapp.packageDirectory}"
+     * 	default-value = "${project.build.directory}/couchapp/packages"
+     */
+    protected File packageDirectory;
+    
+    public void execute() throws MojoExecutionException
+    {
+    	postConstruct();
+    	final CouchAppRepository inputRepo = getSourceRepo();
+    	final CouchAppRepository outputRepo = getTargetRepo();
+    	for (final String id : inputRepo.listIds())
+    	{
+    		DesignDocument app = inputRepo.retrieve(id);
+    		app = processInternal(app);
+    		outputRepo.update(app);
+    	}
+    }
+    
+    protected void postConstruct() {}
+    
+    protected CouchAppRepository getSourceRepo() {
+    	return null;
+    }
+    
+    protected CouchAppRepository getTargetRepo() {
+    	return null;
+    }
+    
+    protected DesignDocument processInternal(DesignDocument doc)
+    	throws MojoExecutionException {
+    	return doc;
+    }
     
     protected Database getDatabase()
     {

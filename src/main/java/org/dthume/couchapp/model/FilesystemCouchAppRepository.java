@@ -66,6 +66,7 @@ public class FilesystemCouchAppRepository
 	}
 	
 	public DesignDocument create(DesignDocument app) {
+		this.baseDir.mkdirs();
 		return update(app);
 	}
 
