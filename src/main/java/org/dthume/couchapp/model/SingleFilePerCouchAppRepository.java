@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
 
-
 import org.apache.commons.io.IOUtils;
 import org.jcouchdb.document.DesignDocument;
 import org.svenson.JSON;
@@ -34,10 +33,10 @@ import org.svenson.JSONParser;
 public class SingleFilePerCouchAppRepository
 	implements CouchAppRepository {
 	
-	public final static String DEFAULT_EXTENSION = ".json";
+	public final static String DEFAULT_EXTENSION = ".couchapp";
 	
 	private final File baseDir;
-	private final String[] extensions = new String[] { "json" };
+	private final String[] extensions = new String[] { "couchapp" };
 	
 	public SingleFilePerCouchAppRepository(File baseDir) {
 		this.baseDir = baseDir;
@@ -59,6 +58,10 @@ public class SingleFilePerCouchAppRepository
 
 	public DesignDocument create(DesignDocument app) {
 		return update(app);
+	}
+	
+	public File getFile(String id) {
+		return new File(baseDir, id + DEFAULT_EXTENSION);
 	}
 
 	public DesignDocument retrieve(String id) {

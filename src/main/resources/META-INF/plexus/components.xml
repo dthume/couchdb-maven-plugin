@@ -36,6 +36,9 @@
 					<package>
 					  org.dthume.couchapp:couchapp-maven-plugin:package
 					</package>
+					<install>
+					  org.apache.maven.plugins:maven-install-plugin:install
+					</install>
 				</phases>
 			</configuration>
 		</component>

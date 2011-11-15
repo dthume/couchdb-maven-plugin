@@ -18,6 +18,8 @@ package org.dthume.couchapp.maven;
 import java.io.File;
 
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.project.MavenProject;
+import org.apache.maven.project.MavenProjectHelper;
 import org.dthume.couchapp.model.CouchAppRepository;
 import org.dthume.couchapp.model.FilesystemCouchAppRepository;
 import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
@@ -47,8 +49,21 @@ public class PackageMojo extends AbstractCouchMojo
      */
     private File packageDirectory;
     
+    /**
+     * @parameter expression="${project}"
+     * @required
+     * @readonly
+     */
+    private MavenProject project;
+    
+    /**
+     * @component
+     * @readonly
+     */
+    private MavenProjectHelper projectHelper;
+    
     private CouchAppRepository inputRepo;
-    private CouchAppRepository outputRepo;
+    private SingleFilePerCouchAppRepository outputRepo;
   
     private void postConstruct()
     {
@@ -63,7 +78,10 @@ public class PackageMojo extends AbstractCouchMojo
     	postConstruct();
     	
     	for (final String app : inputRepo.listIds())
+    	{
     		updateApplication(app);
+    		attachArtifact(app);
+    	}
     }
     
     private void updateApplication(final String id)
@@ -71,5 +89,11 @@ public class PackageMojo extends AbstractCouchMojo
     {
     	getLog().info("Packaging application: " + id);
     	outputRepo.update(inputRepo.retrieve(id));
-    }    
+    }
+    
+    private void attachArtifact(final String id)
+    {
+    	final File file = outputRepo.getFile(id);
+    	projectHelper.attachArtifact(project, "couchapp", id, file);
+    }
 }
