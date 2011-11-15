@@ -22,7 +22,9 @@ import java.io.IOException;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.dthume.couchapp.model.CouchAppRepository;
+import org.dthume.couchapp.model.CouchDBCouchAppRepository;
 import org.dthume.couchapp.model.FilesystemCouchAppRepository;
+import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
 import org.jcouchdb.document.DesignDocument;
 
 /**
@@ -44,11 +46,20 @@ public class PushMojo extends AbstractCouchMojo
     private String packageDirectory;    
     
     private CouchAppRepository inputRepo;
+    
+    private CouchAppRepository outputRepo;
   
-    public void execute() throws MojoExecutionException
+    private void postConstruct()
     {
     	final File dir = new File(packageDirectory);
-    	inputRepo = new FilesystemCouchAppRepository(dir);
+    	inputRepo = new SingleFilePerCouchAppRepository(dir);
+    	
+    	outputRepo = new CouchDBCouchAppRepository(getDatabase());	
+    }
+    
+    public void execute() throws MojoExecutionException
+    {
+    	postConstruct();
     	
     	for (final String app : inputRepo.listIds())
     		updateApplication(app);
@@ -60,15 +71,14 @@ public class PushMojo extends AbstractCouchMojo
     throws MojoExecutionException
     {
     	getLog().info("Pushing application: " + id);
-    	try
-    	{
-    		new RequestHandler(id).handle();
-    	}
-    	catch (IOException e)
-    	{
-    		throw new MojoExecutionException("Caught IOException while pushing application", e);
-    	}
-
+    	
+    	final DesignDocument design = getInputRepo().retrieve(id);
+		final DesignDocument current = getOrCreateDesignDocument(id);
+		
+		if (!isBlank(current.getRevision()))
+			design.setRevision(current.getRevision());
+		
+		outputRepo.update(design);
     }
     
     private DesignDocument getOrCreateDesignDocument(final String application)
@@ -77,29 +87,11 @@ public class PushMojo extends AbstractCouchMojo
 		try
 		{
 			final DesignDocument current =
-					getDatabase().getDesignDocument(application);
+					outputRepo.retrieve(application);
 			design.setRevision(current.getRevision());
 		}
 		catch (Exception e) {} // FIXME
 		
 		return design;
-    }
-    
-    private class RequestHandler
-    {
-    	final DesignDocument design;
-    	
-    	RequestHandler(String id)
-    	{
-    		design = getInputRepo().retrieve(id);
-    		final DesignDocument current = getOrCreateDesignDocument(id);
-    		if (!isBlank(current.getRevision()))
-    			design.setRevision(current.getRevision());
-    	}
-    	
-    	void handle() throws IOException
-    	{
-    		getDatabase().createOrUpdateDocument(design);
-    	}    	
     }    
 }

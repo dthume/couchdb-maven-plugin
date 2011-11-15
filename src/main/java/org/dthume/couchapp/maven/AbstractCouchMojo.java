@@ -15,6 +15,10 @@
  */
 package org.dthume.couchapp.maven;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.Credentials;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.maven.plugin.AbstractMojo;
 import org.jcouchdb.db.Database;
 import org.jcouchdb.db.Server;
@@ -61,7 +65,12 @@ public abstract class AbstractCouchMojo extends AbstractMojo
     protected Server getServer()
     {
     	final ServerImpl server = new ServerImpl(host, port);
-    	
+    	if (!StringUtils.isBlank(username))
+    	{
+    		final Credentials creds = 
+    				new UsernamePasswordCredentials(username, password);
+    		server.setCredentials(AuthScope.ANY, creds);
+    	}
     	return server;
     }
     

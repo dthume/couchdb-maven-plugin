@@ -37,7 +37,7 @@ public class SingleFilePerCouchAppRepository
 	public final static String DEFAULT_EXTENSION = ".json";
 	
 	private final File baseDir;
-	private final String[] extensions = new String[] { DEFAULT_EXTENSION };
+	private final String[] extensions = new String[] { "json" };
 	
 	public SingleFilePerCouchAppRepository(File baseDir) {
 		this.baseDir = baseDir;
