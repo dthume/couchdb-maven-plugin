@@ -1,0 +1,12 @@
+couchapp-maven-plugin
+=====================
+David Thomas Hume
+:Author Initials: DTH
+
+http://couchapp.org[Couchapp], for http://maven.apache.org/[Maven]!
+If *that* doesn't get you excited, it may be time to reach for the back
+button.
+
+Seriously though, it's currently in alpha, and has only really been used, by
+me, to manage my own couch apps.  Documentation and More Stuff Generally is
+forthcoming. 

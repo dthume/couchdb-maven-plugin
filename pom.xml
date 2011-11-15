@@ -115,6 +115,11 @@
         <configuration>
           <header>src/etc/header.txt</header>
           <strictCheck>true</strictCheck>
+          <excludes>
+            <exclude>target/**</exclude>
+            <exclude>.gitignore</exclude>
+            <exclude>README.asciidoc</exclude>
+          </excludes>
         </configuration>
       </plugin>
     </plugins>
