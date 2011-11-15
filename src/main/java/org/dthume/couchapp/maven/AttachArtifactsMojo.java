@@ -23,11 +23,12 @@ import org.apache.maven.project.MavenProjectHelper;
 import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
 
 /**
- * Goal which attaches packaged couchapps to the current project.
+ * [INTERNAL] Attaches packaged couchapps to the current project.
  *
  * @author dth
  * 
  * @goal attach-artifacts
+ * @requiresProject true
  */
 public class AttachArtifactsMojo extends AbstractCouchMojo
 {
@@ -49,7 +50,7 @@ public class AttachArtifactsMojo extends AbstractCouchMojo
     protected void postConstruct()
     {
     	inputRepo =
-    		new SingleFilePerCouchAppRepository(packageDirectory);
+    		new SingleFilePerCouchAppRepository(artifactsDirectory);
     }
     
     public void execute() throws MojoExecutionException

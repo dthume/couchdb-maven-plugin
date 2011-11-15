@@ -24,12 +24,13 @@ import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
 import org.jcouchdb.document.DesignDocument;
 
 /**
- * Goal which pushes one or more couch apps to Couch DB
+ * Standalone goal which pushes one or more couch apps to Couch DB
  *
  * @author dth
  * 
  * @execute phase="package"
  * @goal push
+ * @requiresDirectInvocation true
  */
 public class PushMojo extends AbstractCouchMojo
 {

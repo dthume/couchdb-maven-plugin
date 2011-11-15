@@ -21,7 +21,11 @@ import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.dthume.couchapp.model.CouchAppConstants.toId;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Writer;
 import java.util.Collection;
 
@@ -94,21 +98,20 @@ public class SingleFilePerCouchAppRepository
 		return JSONParser.defaultJSONParser();
 	}
 	
-	private DesignDocument read(final String id)
+	protected DesignDocument read(final String id)
 		throws IOException {
-		final File file = new File(baseDir, id + DEFAULT_EXTENSION);
-		final String json = readFileToString(file);
+		final String json = IOUtils.toString(getInputStream(id));
 		final DesignDocument doc =
 				getJSONParser().parse(DesignDocument.class, json);
 		doc.setId("_design/" + id);
 		return doc;
 	}
 	
-	private void write(final DesignDocument app)
+	protected void write(final DesignDocument app)
 		throws IOException {
 		baseDir.mkdirs();
-		final File file = new File(baseDir, toId(app) + DEFAULT_EXTENSION);
-		final Writer writer = new java.io.FileWriter(file);
+		final OutputStream out = getOutputStream(toId(app));
+		final Writer writer = new java.io.OutputStreamWriter(out);
 		try
 		{
 			getJSON().writeJSONToWriter(app, writer);
@@ -117,5 +120,17 @@ public class SingleFilePerCouchAppRepository
 		{
 			if (null != writer) IOUtils.closeQuietly(writer);
 		}
+	}
+	
+	protected OutputStream getOutputStream(final String id)
+		throws IOException
+	{
+		return new FileOutputStream(new File(baseDir, id + DEFAULT_EXTENSION));
+	}
+	
+	protected InputStream getInputStream(final String id)
+			throws IOException
+	{
+		return new FileInputStream(new File(baseDir, id + DEFAULT_EXTENSION));
 	}
 }

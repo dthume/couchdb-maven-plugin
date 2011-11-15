@@ -101,6 +101,14 @@ public abstract class AbstractCouchMojo extends AbstractMojo
      */
     protected File packageDirectory;
     
+    /**
+     * @required
+     * @parameter
+     *  expression = "${couchapp.artifactsDirectory}"
+     * 	default-value = "${project.build.directory}/couchapp/artifacts"
+     */
+    protected File artifactsDirectory;
+    
     public void execute() throws MojoExecutionException
     {
     	postConstruct();

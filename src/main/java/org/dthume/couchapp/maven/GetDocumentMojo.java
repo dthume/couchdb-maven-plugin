@@ -23,11 +23,13 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.svenson.JSON;
 
 /**
- * Goal which gets a document from Couch DB
+ * Standalone goal which gets a document from Couch DB
  *
  * @author dth
  *
  * @goal get-document
+ * @requiresProject false
+ * @requiresDirectInvocation true
  */
 public class GetDocumentMojo extends AbstractCouchMojo
 {

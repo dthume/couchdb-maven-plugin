@@ -35,6 +35,7 @@
 					</compile>
 					<package>
 					  org.dthume.couchapp:couchapp-maven-plugin:package,
+					  org.dthume.couchapp:couchapp-maven-plugin:compress-artifacts,
 					  org.dthume.couchapp:couchapp-maven-plugin:attach-artifacts
 					</package>
 					<install>

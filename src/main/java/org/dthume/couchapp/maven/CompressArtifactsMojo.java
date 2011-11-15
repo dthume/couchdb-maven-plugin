@@ -15,8 +15,8 @@
  */
 package org.dthume.couchapp.maven;
 
+import org.dthume.couchapp.model.CompressingSingleFilePerCouchAppRepository;
 import org.dthume.couchapp.model.CouchAppRepository;
-import org.dthume.couchapp.model.FilesystemCouchAppRepository;
 import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
 
 /**
@@ -25,12 +25,12 @@ import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
  *
  * @author dth
  * 
- * @goal package
+ * @goal compress-artifacts
  */
-public class PackageMojo extends AbstractCouchMojo
+public class CompressArtifactsMojo extends AbstractCouchMojo
 {
     private CouchAppRepository inputRepo;
-    private SingleFilePerCouchAppRepository outputRepo;
+    private CouchAppRepository outputRepo;
     
     @Override
 	protected CouchAppRepository getSourceRepo() { return inputRepo; }
@@ -42,8 +42,8 @@ public class PackageMojo extends AbstractCouchMojo
 	protected void postConstruct()
     {
     	inputRepo =
-    		new FilesystemCouchAppRepository(expandedSourcesDirectory);
+    		new SingleFilePerCouchAppRepository(packageDirectory);
     	outputRepo =
-        	new SingleFilePerCouchAppRepository(packageDirectory);
+        	new CompressingSingleFilePerCouchAppRepository(artifactsDirectory);
     }
 }
