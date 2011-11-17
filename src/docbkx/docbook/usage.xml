@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<article xmlns="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <info>
+    <title>Usage</title>
+
+    <pubdate>2011-11-16</pubdate>
+
+    <abstract>
+      <para>
+        An overview of how to use the couchapp-maven-plugin
+      </para>
+    </abstract>
+  </info>
+  <section>
+    <title>Developing Couch Applications</title>
+    <para>
+      The plugin defines a new packaging type and so you must ensure that
+      <tag class="element">extensions</tag> is set to <code>true</code>
+      in your plugin declaration:
+      
+      <example>
+        <title>Adding the plugin to a project</title>
+        <programlisting language="xml"
+>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;&gt;
+    // project header...
+    
+    &lt;build&gt;
+        &lt;!-- To define the plugin version in your parent POM --&gt;
+        &lt;pluginManagement&gt;
+            &lt;plugins&gt;
+                &lt;plugin&gt;
+                    &lt;groupId&gt;<?eval ${project.groupId}?>&lt;/groupId&gt;
+                    &lt;artifactId&gt;<?eval ${project.artifactId}?>&lt;/artifactId&gt;
+                    &lt;version&gt;<?eval ${project.version}?>&lt;/version&gt;
+                    &lt;extensions&gt;true&lt;/extensions&gt;
+                &lt;/plugin&gt;
+
+                // other plugins...
+            &lt;/plugins&gt;
+        &lt;/pluginManagement&gt;
+        &lt;!-- To use the plugin goals in your POM or parent POM --&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;<?eval ${project.groupId}?>&lt;/groupId&gt;
+                &lt;artifactId&gt;<?eval ${project.artifactId}?>&lt;/artifactId&gt;
+                &lt;version&gt;<?eval ${project.version}?>&lt;/version&gt;
+                &lt;extensions&gt;true&lt;/extensions&gt;
+            &lt;/plugin&gt;
+
+            // other plugins...
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+    
+    // rest of project config...
+&lt;/project&gt;</programlisting>
+      </example>
+    </para>
+    <para>
+      With this done, you can then declare projects with a packaging of
+      <code>couchapp</code>:
+      <example>
+        <title>Defining a couchapp project</title>
+        <programlisting language="xml"
+><![CDATA[<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <groupId>my.group.id</groupId>
+    <artifactId>some-couch-project</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>couchapp</packaging>
+    // rest of project
+</project>]]></programlisting>
+      </example>    
+    </para>
+  </section>
+  <section>
+    <title>Working with Couch DB Instances</title>
+    <para>
+      TODO
+    </para>
+  </section>
+</article>

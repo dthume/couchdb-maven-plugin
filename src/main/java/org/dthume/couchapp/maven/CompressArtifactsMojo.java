@@ -20,8 +20,8 @@ import org.dthume.couchapp.model.CouchAppRepository;
 import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
 
 /**
- * [INTERNAL] Packages a couchapp in preparation for deployment to couch db
- * or an artifact repository.
+ * Packages a couchapp in preparation for deployment to couch db or an
+ * artifact repository.
  *
  * @author dth
  * 

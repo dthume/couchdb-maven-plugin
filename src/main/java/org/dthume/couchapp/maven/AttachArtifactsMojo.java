@@ -23,7 +23,7 @@ import org.apache.maven.project.MavenProjectHelper;
 import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
 
 /**
- * [INTERNAL] Attaches packaged couchapps to the current project.
+ * Attaches packaged couchapps to the current project.
  *
  * @author dth
  * 

@@ -33,37 +33,47 @@ import org.svenson.JSON;
 public abstract class AbstractCouchMojo extends AbstractMojo
 {
     /**
-     * @parameter expression="${couchapp.host}"
-     * @required
+     * The hostname of the Couch instance
+     * 
+     * @parameter
+     * 	expression="${couchapp.host}"
+     * 	default-value = "localhost"
      */
     private String host;
     
     /**
+     * The port of the Couch instance
+     * 
      * @parameter
      * 	expression = "${couchapp.port}"
-     * 	default-value = "5984" 
-     * @required
+     * 	default-value = "5984"
      */
     private int port;
     
     /**
+     * ID of the database to work with
+     * 
      * @parameter expression="${couchapp.database}"
-     * @required
      */
     private String database;
     
     /**
+     * The username to use when communicating with the Couch instance
+     * 
      * @parameter expression="${couchapp.username}"
      */
     private String username;
     
     /**
+     * The password to use when communicating with the Couch instance
+     * 
      * @parameter expression="${couchapp.password}"
      */
     private String password;
     
     /**
-     * @required
+     * The directory where couchapp sources are stored
+     * 
      * @parameter
      *  expression = "${couchapp.sourceDirectory}"
      * 	default-value = "${basedir}/src/main/couchapp"
@@ -71,14 +81,12 @@ public abstract class AbstractCouchMojo extends AbstractMojo
     protected File sourceDirectory;
 	
     /**
-     * @required
      * @parameter
      *  expression = "${project.build.directory}/${project.build.finalName}"
      */
     protected File webappDirectory;
     
     /**
-     * @required
      * @parameter
      *  expression = "${scripts}"
      *  default-value = "scripts"
@@ -86,7 +94,8 @@ public abstract class AbstractCouchMojo extends AbstractMojo
     protected String scriptsDirectory;
     
     /**
-     * @required
+     * The directory to use for expanded couchapp source files
+     * 
      * @parameter
      *  expression = "${couchapp.expandedSourcesDirectory}"
      * 	default-value = "${project.build.directory}/couchapp/expanded"
@@ -94,7 +103,8 @@ public abstract class AbstractCouchMojo extends AbstractMojo
     protected File expandedSourcesDirectory;
     
     /**
-     * @required
+     * The directory to use for packaged couchapps
+     * 
      * @parameter
      *  expression = "${couchapp.packageDirectory}"
      * 	default-value = "${project.build.directory}/couchapp/packages"
@@ -102,7 +112,8 @@ public abstract class AbstractCouchMojo extends AbstractMojo
     protected File packageDirectory;
     
     /**
-     * @required
+     * The directory to use for couchapps packaged as maven artifacts
+     * 
      * @parameter
      *  expression = "${couchapp.artifactsDirectory}"
      * 	default-value = "${project.build.directory}/couchapp/artifacts"

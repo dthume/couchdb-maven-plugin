@@ -32,7 +32,7 @@ import org.jcouchdb.document.DesignDocument;
 import org.jcouchdb.document.View;
 
 /**
- * [INTERNAL] Expands include (!code [FILE]) comments in couch app files
+ * Expands include (!code [FILE]) comments in couch app files
  *
  * @author dth
  * 

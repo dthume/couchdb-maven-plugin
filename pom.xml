@@ -51,7 +51,7 @@
   </distributionManagement>
 
   <developers>
-     <developer>
+    <developer>
       <id>dth</id>
       <name>David Thomas Hume</name>
       <email>dth@dthu.me</email>
@@ -69,6 +69,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.lang.version>1.5</java.lang.version>
+
+    <docbook.target.directory>
+      ${project.build.directory}/docbook
+    </docbook.target.directory>    
+    <docbook.xhtml.target.directory>
+      ${docbook.target.directory}/xhtml
+    </docbook.xhtml.target.directory>
   </properties>
 
   <dependencies>
@@ -150,6 +157,46 @@
             <exclude>README.asciidoc</exclude>
           </excludes>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.agilejava.docbkx</groupId>
+        <artifactId>docbkx-maven-plugin</artifactId>
+        <version>2.0.10</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate-xhtml</goal>
+            </goals>
+            <phase>pre-site</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <!-- General Config -->
+          <chunkedOutput>false</chunkedOutput>
+          <generatedSourceDirectory>${docbook.target.directory}/xinclude</generatedSourceDirectory>
+          <highlightSource>1</highlightSource>
+          <targetDirectory>${docbook.xhtml.target.directory}</targetDirectory>
+          <includes>docbook/*.xml</includes>
+          <xincludeSupported>true</xincludeSupported>
+          <!-- Customisation Stylesheets -->
+          <xhtmlCustomization>
+            ${basedir}/src/docbkx/xsl/db-xhtml-customizations.xsl
+          </xhtmlCustomization>
+          <!-- Custom Processing -->
+          <postProcess>
+            <copy todir="${project.build.directory}/generated-site/xhtml">
+              <fileset dir="${docbook.xhtml.target.directory}/docbook" />
+            </copy>
+          </postProcess>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>net.sf.xslthl</groupId>
+            <artifactId>xslthl</artifactId>
+            <version>2.0.2</version>
+            <scope>runtime</scope>
+          </dependency>
+        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
