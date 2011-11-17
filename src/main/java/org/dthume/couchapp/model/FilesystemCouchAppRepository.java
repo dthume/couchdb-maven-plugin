@@ -116,7 +116,7 @@ public class FilesystemCouchAppRepository
 		
 		if (!isBlank(view.getReduce())) {
 			final File map = new File(dir, CouchAppConstants.REDUCE_FILE);
-			writeStringToFile(map, view.getMap());
+			writeStringToFile(map, view.getReduce());
 		}		
 	}
 	
