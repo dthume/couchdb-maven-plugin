@@ -23,7 +23,7 @@ import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.dthume.couchapp.model.CouchAppRepository;
+import org.dthume.couchapp.repository.CouchAppRepository;
 import org.jcouchdb.db.Database;
 import org.jcouchdb.db.Server;
 import org.jcouchdb.db.ServerImpl;
@@ -101,6 +101,15 @@ public abstract class AbstractCouchMojo extends AbstractMojo
      * 	default-value = "${project.build.directory}/couchapp/expanded"
      */
     protected File expandedSourcesDirectory;
+    
+    /**
+     * The directory to use for compiled couchapp source files
+     * 
+     * @parameter
+     *  expression = "${couchapp.compiledSourcesDirectory}"
+     * 	default-value = "${project.build.directory}/couchapp/compiled"
+     */
+    protected File compiledSourcesDirectory;
     
     /**
      * The directory to use for packaged couchapps

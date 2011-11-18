@@ -13,37 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@CHARSET "ISO-8859-1";
+package org.dthume.couchapp.model;
 
-.programlisting {
-    background: url("/resources/images/textures/cb_fbr_tex.gif") repeat-y;
-    padding: 5px 5px 5px 45px;
-    margin: 0;
-    border: 1px dashed #DDDDDD;
-}
-
-.programlisting .lineannotation, .hl-comment, .hl-multiline-comment {
-    color: green;
-    font-style: italic;
-}
-
-code, .hl-keyword {
-    color: #7F0055;
-}
-
-.hl-tag {
-    color: #3F7F7F;
-}
-
-.hl-attribute {
-    color: #7F007F;
-}
-
-.hl-value, .hl-string {
-    color: #2A00FF;
-}
-
-.rfc2119 {
-    font-weight: bold;
-    text-transform: uppercase;
+public interface CouchApp {
+	
+	String getId();
+	
+	
 }

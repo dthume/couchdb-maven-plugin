@@ -15,9 +15,9 @@
  */
 package org.dthume.couchapp.maven;
 
-import org.dthume.couchapp.model.CouchAppRepository;
-import org.dthume.couchapp.model.FilesystemCouchAppRepository;
-import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
+import org.dthume.couchapp.repository.CouchAppRepository;
+import org.dthume.couchapp.repository.FilesystemCouchAppRepository;
+import org.dthume.couchapp.repository.SingleFilePerCouchAppRepository;
 
 /**
  * Packages a couchapp in preparation for deployment to couch db or an
@@ -42,7 +42,7 @@ public class PackageMojo extends AbstractCouchMojo
 	protected void postConstruct()
     {
     	inputRepo =
-    		new FilesystemCouchAppRepository(expandedSourcesDirectory);
+    		new FilesystemCouchAppRepository(compiledSourcesDirectory);
     	outputRepo =
         	new SingleFilePerCouchAppRepository(packageDirectory);
     }

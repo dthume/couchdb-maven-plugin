@@ -26,8 +26,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.maven.plugin.MojoExecutionException;
-import org.dthume.couchapp.model.CouchAppRepository;
-import org.dthume.couchapp.model.FilesystemCouchAppRepository;
+import org.dthume.couchapp.repository.CouchAppRepository;
+import org.dthume.couchapp.repository.FilesystemCouchAppRepository;
 import org.jcouchdb.document.DesignDocument;
 import org.jcouchdb.document.View;
 
@@ -96,6 +96,7 @@ public class ExpandIncludesMojo extends AbstractCouchMojo
     	if (null == js) return js;
     	
 		final StringBuffer sb = new StringBuffer();
+		
 		final Matcher matcher = INCLUDES_PATTERN.matcher(js);
 		while (matcher.find()) {
 			final String replacement =
@@ -104,6 +105,7 @@ public class ExpandIncludesMojo extends AbstractCouchMojo
 			sb.append("\n");
 		}
 		matcher.appendTail(sb);
+		
 		return sb.toString();
     }
     

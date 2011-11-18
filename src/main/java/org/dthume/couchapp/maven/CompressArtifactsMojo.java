@@ -15,9 +15,9 @@
  */
 package org.dthume.couchapp.maven;
 
-import org.dthume.couchapp.model.CompressingSingleFilePerCouchAppRepository;
-import org.dthume.couchapp.model.CouchAppRepository;
-import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
+import org.dthume.couchapp.repository.CompressingSingleFilePerCouchAppRepository;
+import org.dthume.couchapp.repository.CouchAppRepository;
+import org.dthume.couchapp.repository.SingleFilePerCouchAppRepository;
 
 /**
  * Packages a couchapp in preparation for deployment to couch db or an

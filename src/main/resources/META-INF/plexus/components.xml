@@ -31,7 +31,8 @@
           </process-resources>
 					<compile>
 					  org.codehaus.mojo.javascript:javascript-maven-plugin:war-package,
-					  org.dthume.couchapp:couchapp-maven-plugin:expand-includes
+					  org.dthume.couchapp:couchapp-maven-plugin:expand-includes,
+					  org.dthume.couchapp:couchapp-maven-plugin:compile-js
 					</compile>
 					<package>
 					  org.dthume.couchapp:couchapp-maven-plugin:package,

@@ -20,7 +20,7 @@ import java.io.File;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
-import org.dthume.couchapp.model.SingleFilePerCouchAppRepository;
+import org.dthume.couchapp.repository.SingleFilePerCouchAppRepository;
 
 /**
  * Attaches packaged couchapps to the current project.

@@ -16,16 +16,26 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/DECORATION/1.0.0"
+<document xmlns="http://maven.apache.org/changes/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="
-    http://maven.apache.org/DECORATION/1.0.0
-    http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+    http://maven.apache.org/changes/1.0.0
+    http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>Couchapp Maven Plugin</title>
+    <author email="dth@dthu.me">David Thomas Hume</author>
+  </properties>
   <body>
-    <menu name="Overview">
-      <item name="Introduction" href="index.html"/>
-      <item name="Usage" href="usage.html"/>
-    </menu>
-    <menu ref="reports"/>
+    <release version="0.2" date="2011-11-18">
+      <action dev="dth" type="add">
+        Support for compression / compilation of JS files using WRO4J.
+      </action>
+    </release>
+    <release version="0.1" date="2011-11-16"
+      description="First release, still alpha and subject to change">
+      <action dev="dth" type="add">
+        Support for creation of basic (views only) couchapps
+      </action>
+    </release>
   </body>
-</project>
+</document>
