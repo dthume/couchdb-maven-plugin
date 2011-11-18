@@ -13,22 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dthume.couchapp.model;
+package org.dthume.couchdb.repository;
+
+import java.util.Collection;
 
 import org.jcouchdb.document.DesignDocument;
 
-public class CouchAppConstants
-{
-	private CouchAppConstants() { }
-	
-	public final static String MAP_FILE = "map.js";
-	public final static String REDUCE_FILE = "reduce.js";
-	
-	public final static String VIEWS_FILE = "views";
-	
-	public static String toId(DesignDocument doc)
-	{
-		final String id = doc.getId();
-		return id.substring(id.indexOf("/") + 1);
-	}
+public interface CouchAppRepository {
+	Collection<String> listIds();
+	DesignDocument create(DesignDocument app);
+	DesignDocument retrieve(String id);
+	DesignDocument update(DesignDocument app);
+	boolean delete(DesignDocument app);
 }

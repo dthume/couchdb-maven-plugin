@@ -13,31 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dthume.couchapp.maven.util;
+package org.dthume.couchdb.model;
 
-import java.io.File;
-import java.io.FilenameFilter;
-
-public class IOUtil
-{
-	private IOUtil() {}
+public interface CouchApp {
 	
-	public static Iterable<File> iterateDirectories(final File dir)
-    {
-    	final String[] names = dir.list(new FilenameFilter()
-    	{
-			public boolean accept(File dir, String name)
-			{
-				return new File(dir, name).isDirectory();
-			}
-    	});
-    	
-    	final java.util.List<File> directories =
-    		new java.util.ArrayList<File>(names.length);
-    	
-    	for (final String name : names)
-    		directories.add(new File(dir, name));
-    	
-    	return directories;
-    }
+	String getId();
+	
+	
 }

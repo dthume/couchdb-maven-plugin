@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dthume.couchapp.maven;
+package org.dthume.couchdb.maven;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.dthume.couchapp.model.CouchAppConstants.toId;
+import static org.dthume.couchdb.model.CouchAppConstants.toId;
 
-import org.dthume.couchapp.repository.CouchAppRepository;
-import org.dthume.couchapp.repository.CouchDBCouchAppRepository;
-import org.dthume.couchapp.repository.SingleFilePerCouchAppRepository;
+import org.dthume.couchdb.repository.CouchAppRepository;
+import org.dthume.couchdb.repository.CouchDBCouchAppRepository;
+import org.dthume.couchdb.repository.SingleFilePerCouchAppRepository;
 import org.jcouchdb.document.DesignDocument;
 
 /**

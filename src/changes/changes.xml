@@ -22,7 +22,7 @@
     http://maven.apache.org/changes/1.0.0
     http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <properties>
-    <title>Couchapp Maven Plugin</title>
+    <title>CouchDB Maven Plugin</title>
     <author email="dth@dthu.me">David Thomas Hume</author>
   </properties>
   <body>

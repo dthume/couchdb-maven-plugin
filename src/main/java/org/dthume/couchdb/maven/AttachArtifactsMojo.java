@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dthume.couchapp.maven;
+package org.dthume.couchdb.maven;
 
 import java.io.File;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
-import org.dthume.couchapp.repository.SingleFilePerCouchAppRepository;
+import org.dthume.couchdb.repository.SingleFilePerCouchAppRepository;
 
 /**
  * Attaches packaged couchapps to the current project.

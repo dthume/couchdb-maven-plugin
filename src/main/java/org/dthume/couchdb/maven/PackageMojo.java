@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dthume.couchapp.maven;
+package org.dthume.couchdb.maven;
 
-import org.dthume.couchapp.repository.CouchAppRepository;
-import org.dthume.couchapp.repository.FilesystemCouchAppRepository;
-import org.dthume.couchapp.repository.SingleFilePerCouchAppRepository;
+import org.dthume.couchdb.repository.CouchAppRepository;
+import org.dthume.couchdb.repository.FilesystemCouchAppRepository;
+import org.dthume.couchdb.repository.SingleFilePerCouchAppRepository;
 
 /**
  * Packages a couchapp in preparation for deployment to couch db or an

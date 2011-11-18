@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dthume.couchapp.repository;
+package org.dthume.couchdb.repository;
 
 import java.util.Collection;
 
-import org.dthume.couchapp.model.CouchAppConstants;
+import org.dthume.couchdb.model.CouchAppConstants;
 import org.jcouchdb.db.Database;
 import org.jcouchdb.document.DesignDocument;
 

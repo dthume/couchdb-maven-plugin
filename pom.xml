@@ -6,13 +6,13 @@
   
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.dthume.couchapp</groupId>
-  <artifactId>couchapp-maven-plugin</artifactId>
+  <groupId>org.dthume.couchdb</groupId>
+  <artifactId>couchdb-maven-plugin</artifactId>
   <version>0.2-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
 
-  <name>Couchapp Maven Plugin</name>
-  <url>https://github.com/dthume/couchapp-maven-plugin</url>
+  <name>CouchDB Maven Plugin</name>
+  <url>https://github.com/dthume/couchdb-maven-plugin</url>
 
   <description>
     CouchApp...for Maven!
@@ -30,14 +30,14 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:git://github.com/dthume/couchapp-maven-plugin.git</connection>
-    <developerConnection>scm:git:https://dthume@github.com/dthume/couchapp-maven-plugin.git</developerConnection>
-    <url>https://github.com/dthume/couchapp-maven-plugin</url>
+    <connection>scm:git:git://github.com/dthume/couchdb-maven-plugin.git</connection>
+    <developerConnection>scm:git:https://dthume@github.com/dthume/couchdb-maven-plugin.git</developerConnection>
+    <url>https://github.com/dthume/couchdb-maven-plugin</url>
   </scm>
   
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/dthume/couchapp-maven-plugin/issues</url>
+    <url>https://github.com/dthume/couchdb-maven-plugin/issues</url>
   </issueManagement>
   
   <distributionManagement>
@@ -45,7 +45,7 @@
       <id>dthu.me.web</id>
       <name>Couchapp Maven Website</name>
       <url>
-        scp://dthu.me/home/dth/sites/org/dthume/couchapp/couchapp-maven-plugin/${project.version}/
+        scp://dthu.me/home/dth/sites/org/dthume/couchapp/couchdb-maven-plugin/${project.version}/
       </url>
     </site>
   </distributionManagement>
@@ -145,7 +145,7 @@
         <artifactId>maven-plugin-plugin</artifactId>
         <version>2.5.1</version>
         <configuration>
-          <goalPrefix>couchapp</goalPrefix>
+          <goalPrefix>couchdb</goalPrefix>
         </configuration>
         <executions>
           <execution>

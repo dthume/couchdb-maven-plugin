@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dthume.couchapp.maven;
+package org.dthume.couchdb.maven;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
 
-import static org.dthume.couchapp.model.CouchAppConstants.toId;
+import static org.dthume.couchdb.model.CouchAppConstants.toId;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +26,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.maven.plugin.MojoExecutionException;
-import org.dthume.couchapp.repository.CouchAppRepository;
-import org.dthume.couchapp.repository.FilesystemCouchAppRepository;
+import org.dthume.couchdb.repository.CouchAppRepository;
+import org.dthume.couchdb.repository.FilesystemCouchAppRepository;
 import org.jcouchdb.document.DesignDocument;
 import org.jcouchdb.document.View;
 

@@ -31,13 +31,13 @@
           </process-resources>
 					<compile>
 					  org.codehaus.mojo.javascript:javascript-maven-plugin:war-package,
-					  org.dthume.couchapp:couchapp-maven-plugin:expand-includes,
-					  org.dthume.couchapp:couchapp-maven-plugin:compile-js
+					  org.dthume.couchdb:couchdb-maven-plugin:expand-includes,
+					  org.dthume.couchdb:couchdb-maven-plugin:compile-js
 					</compile>
 					<package>
-					  org.dthume.couchapp:couchapp-maven-plugin:package,
-					  org.dthume.couchapp:couchapp-maven-plugin:compress-artifacts,
-					  org.dthume.couchapp:couchapp-maven-plugin:attach-artifacts
+					  org.dthume.couchdb:couchdb-maven-plugin:package,
+					  org.dthume.couchdb:couchdb-maven-plugin:compress-artifacts,
+					  org.dthume.couchdb:couchdb-maven-plugin:attach-artifacts
 					</package>
 					<install>
 					  org.apache.maven.plugins:maven-install-plugin:install

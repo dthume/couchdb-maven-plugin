@@ -27,7 +27,7 @@
 
     <abstract>
       <para>
-        An overview of how to use the couchapp-maven-plugin
+        An overview of how to use the couchdb-maven-plugin
       </para>
     </abstract>
   </info>

@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dthume.couchapp.repository;
+package org.dthume.couchdb.repository;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.commons.io.FileUtils.writeStringToFile;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-import static org.dthume.couchapp.maven.util.IOUtil.iterateDirectories;
-import static org.dthume.couchapp.model.CouchAppConstants.toId;
+import static org.dthume.couchdb.maven.util.IOUtil.iterateDirectories;
+import static org.dthume.couchdb.model.CouchAppConstants.toId;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +29,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.dthume.couchapp.model.CouchAppConstants;
+import org.dthume.couchdb.model.CouchAppConstants;
 import org.jcouchdb.document.DesignDocument;
 import org.jcouchdb.document.View;
 
