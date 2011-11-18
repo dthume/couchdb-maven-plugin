@@ -54,7 +54,14 @@ public class CompileJSMojo extends AbstractCouchMojo
      * 	expression = "${couchapp.skipCompilation}"
      *  default-value = false
      */
-    protected boolean skipCompilation = false;
+    private boolean skipCompilation = false;
+    
+    /**
+     * Whether or not to compile JavaScript files
+     * 
+     * @parameter expression = "${project.build.sourceEncoding}"
+     */
+    private String sourceEncoding = "UTF-8";
     
     @Override
 	protected CouchAppRepository getSourceRepo() { return inputRepo; }
@@ -78,7 +85,7 @@ public class CompileJSMojo extends AbstractCouchMojo
 		final Context context = Context.standaloneContext();
 		
 		final WroConfiguration config = new WroConfiguration();
-		config.setEncoding("UTF-8"); // FIXME - use build encoding
+		config.setEncoding(sourceEncoding);
 		context.setConfig(config);
 		
 		Context.set(context);
