@@ -42,7 +42,7 @@
         <title>Adding the plugin to a project</title>
         <programlisting language="xml"
 >&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;&gt;
-    // project header...
+    ...
     
     &lt;build&gt;
         &lt;!-- To define the plugin version in your parent POM --&gt;
@@ -55,7 +55,7 @@
                     &lt;extensions&gt;true&lt;/extensions&gt;
                 &lt;/plugin&gt;
 
-                // other plugins...
+                ...
             &lt;/plugins&gt;
         &lt;/pluginManagement&gt;
         &lt;!-- To use the plugin goals in your POM or parent POM --&gt;
@@ -67,11 +67,11 @@
                 &lt;extensions&gt;true&lt;/extensions&gt;
             &lt;/plugin&gt;
 
-            // other plugins...
+            ...
         &lt;/plugins&gt;
     &lt;/build&gt;
     
-    // rest of project config...
+    ...
 &lt;/project&gt;</programlisting>
       </example>
     </para>
@@ -86,15 +86,44 @@
     <artifactId>some-couch-project</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>couchapp</packaging>
-    // rest of project
+    ...
 </project>]]></programlisting>
-      </example>    
+      </example>
+      which will bind the default set of couchapp goals to the lifecycle.     
+    </para>
+    <para>
+      Couchapps should be placed under
+      <code>couchapp.sourceDirectory</code>, which defaults to:
+      <code>${basedir}src/main/couchapp</code>.
+      
+      The directory structure is as follows:
+      <screen>
+src/main/couchapp/
+|- application_1/
+|  |- views/
+|     |- view_1/
+|     |  |- map.js
+|     |  |- reduce.js <lineannotation>(optional)</lineannotation>
+|     |- view_2/
+|        |- map.js
+|- application_2/ <lineannotation>(optional)</lineannotation>
+   ... same as above ...
+      </screen>
     </para>
   </section>
   <section>
     <title>Working with Couch DB Instances</title>
     <para>
-      TODO
+      The plugin also provides a set of goals for working directly with live
+      CouchDB instances, including <link xlink:href="get-document-mojo.html"
+      >document retrieval</link>
+      and <link xlink:href="push-mojo.html">deployment of couchapps</link>.
+      
+      These goals all require additional configuration; specifically the
+      host, port, authentication details and database name of the couch
+      server. Currently only <link
+      xlink:href="http://guide.couchdb.org/draft/security.html#authentication"
+      >basic security</link> is supported.
     </para>
   </section>
 </article>

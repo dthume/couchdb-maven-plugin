@@ -34,107 +34,100 @@ import ro.isdc.wro.model.resource.processor.ResourcePostProcessor;
 
 /**
  * Compress the JavaScript use for view / show etc. functions.
- *
+ * 
  * @author dth
  * 
  * @goal compile-js
  */
-public class CompileJSMojo extends AbstractCouchMojo
-{
-    private final ResourcePostProcessor postProcessor =
-    	new GoogleClosureCompressorProcessor();
+public class CompileJSMojo extends AbstractCouchMojo {
+
+    private final ResourcePostProcessor postProcessor = new GoogleClosureCompressorProcessor();
 
     private CouchAppRepository inputRepo;
     private CouchAppRepository outputRepo;
-        
+
     /**
      * Whether or not to compile JavaScript files
      * 
-     * @parameter
-     * 	expression = "${couchapp.skipCompilation}"
-     *  default-value = false
+     * @parameter expression = "${couchapp.skipCompilation}" default-value =
+     *            false
      */
     private boolean skipCompilation = false;
-    
+
     /**
      * Whether or not to compile JavaScript files
      * 
      * @parameter expression = "${project.build.sourceEncoding}"
      */
     private String sourceEncoding = "UTF-8";
-    
+
     @Override
-	protected CouchAppRepository getSourceRepo() { return inputRepo; }
-
-	@Override
-	protected CouchAppRepository getTargetRepo() { return outputRepo; }
-
-	@Override
-	protected void postConstruct()
-    {
-    	inputRepo =
-    		new FilesystemCouchAppRepository(expandedSourcesDirectory);
-    	outputRepo =
-        	new FilesystemCouchAppRepository(compiledSourcesDirectory);
-    	
-    	initWRO();
+    protected CouchAppRepository getSourceRepo() {
+        return inputRepo;
     }
-	
-	private void initWRO()
-	{
-		final Context context = Context.standaloneContext();
-		
-		final WroConfiguration config = new WroConfiguration();
-		config.setEncoding(sourceEncoding);
-		context.setConfig(config);
-		
-		Context.set(context);
-	}
 
-	@Override
-	protected DesignDocument processInternal(DesignDocument doc)
-			throws MojoExecutionException
-	{
-		doc = super.processInternal(doc);
-		
-		if (!skipCompilation)
-		{
-			getLog().debug("Compiling JS in design document: " + doc.getId());
-			
-			for (Map.Entry<String, View> entry : doc.getViews().entrySet())
-				compressView(entry.getValue());
-		}
-		
-		return doc;
-	}
-	
-	private void compressView(View view)
-	{
-		view.setMap(compressJS(view.getMap()));
-		view.setReduce(compressJS(view.getReduce()));
-	}
-	
-	private final static String JS_PREFIX =
-		"var __couchapp_anon_function__=";
-	
-	private String compressJS(String js)
-	{
-		if (StringUtils.isBlank(js)) return js;
-		
-		String result = js;
-		
-		try
-		{
-			final StringReader reader = new StringReader(JS_PREFIX + js);
-			final StringWriter writer = new StringWriter();
-			postProcessor.process(reader, writer);
-			result = writer.toString().substring(JS_PREFIX.length());
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace(); // FIXME
-		}
-		
-		return result;
-	}
+    @Override
+    protected CouchAppRepository getTargetRepo() {
+        return outputRepo;
+    }
+
+    @Override
+    protected void postConstruct() {
+        inputRepo = new FilesystemCouchAppRepository(getExpandedDir());
+        outputRepo = new FilesystemCouchAppRepository(getCompiledDir());
+
+        initWRO();
+    }
+
+    private void initWRO() {
+        final Context context = Context.standaloneContext();
+
+        final WroConfiguration config = new WroConfiguration();
+        config.setEncoding(sourceEncoding);
+        context.setConfig(config);
+
+        Context.set(context);
+    }
+
+    @Override
+    protected DesignDocument processInternal(DesignDocument doc)
+            throws MojoExecutionException {
+        doc = super.processInternal(doc);
+
+        if (!skipCompilation) {
+            getLog().debug("Compiling JS in design document: " + doc.getId());
+
+            for (Map.Entry<String, View> entry : doc.getViews().entrySet())
+                compressView(entry.getValue());
+        }
+
+        return doc;
+    }
+
+    private void compressView(View view) {
+        view.setMap(compressJS(view.getMap()));
+        view.setReduce(compressJS(view.getReduce()));
+    }
+
+    private final static String JS_PREFIX = "var __couchapp_anon_function__=";
+
+    private String compressJS(String js) {
+        if (StringUtils.isBlank(js))
+            return js;
+
+        String result = js;
+
+        try {
+            final StringReader reader = new StringReader(JS_PREFIX + js);
+            final StringWriter writer = new StringWriter();
+            
+            postProcessor.process(reader, writer);
+            
+            result = writer.toString().substring(JS_PREFIX.length());
+        } catch (IOException e) {
+            e.printStackTrace(); // FIXME
+        }
+
+        return result;
+    }
 }

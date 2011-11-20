@@ -17,165 +17,85 @@ package org.dthume.couchdb.maven;
 
 import java.io.File;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.dthume.couchdb.repository.CouchAppRepository;
-import org.jcouchdb.db.Database;
-import org.jcouchdb.db.Server;
-import org.jcouchdb.db.ServerImpl;
 import org.jcouchdb.document.DesignDocument;
 import org.svenson.JSON;
 
-public abstract class AbstractCouchMojo extends AbstractMojo
-{
-    /**
-     * The hostname of the Couch instance
-     * 
-     * @parameter
-     * 	expression="${couchapp.host}"
-     * 	default-value = "localhost"
-     */
-    private String host;
+/**
+ * Base class for couch mojos; defines the base set of configuration
+ * properties.
+ *
+ * @author dth
+ */
+public abstract class AbstractCouchMojo extends AbstractMojo {
     
     /**
-     * The port of the Couch instance
-     * 
-     * @parameter
-     * 	expression = "${couchapp.port}"
-     * 	default-value = "5984"
-     */
-    private int port;
-    
-    /**
-     * ID of the database to work with
-     * 
-     * @parameter expression="${couchapp.database}"
-     */
-    private String database;
-    
-    /**
-     * The username to use when communicating with the Couch instance
-     * 
-     * @parameter expression="${couchapp.username}"
-     */
-    private String username;
-    
-    /**
-     * The password to use when communicating with the Couch instance
-     * 
-     * @parameter expression="${couchapp.password}"
-     */
-    private String password;
-    
-    /**
-     * The directory where couchapp sources are stored
-     * 
+     * The directory where couchapp sources are stored.
+     *
      * @parameter
      *  expression = "${couchapp.sourceDirectory}"
-     * 	default-value = "${basedir}/src/main/couchapp"
+     *  default-value = "${basedir}/src/main/couchapp"
      */
     protected File sourceDirectory;
-	
+
     /**
+     * The directory where couchapps are built to.
+     *
+     * @parameter default-value = "${project.build.directory}/couchapp"
+     */
+    protected File targetDirectory;
+
+    /**
+     * The directory where web application files are built to.
+     *
      * @parameter
      *  expression = "${project.build.directory}/${project.build.finalName}"
      */
     protected File webappDirectory;
-    
+
     /**
+     * The directory where JavaScript files are placed, relative to the
+     * {@code webappDirectory}.
+     *
      * @parameter
      *  expression = "${scripts}"
      *  default-value = "scripts"
      */
     protected String scriptsDirectory;
-    
-    /**
-     * The directory to use for expanded couchapp source files
-     * 
-     * @parameter
-     *  expression = "${couchapp.expandedSourcesDirectory}"
-     * 	default-value = "${project.build.directory}/couchapp/expanded"
-     */
-    protected File expandedSourcesDirectory;
-    
-    /**
-     * The directory to use for compiled couchapp source files
-     * 
-     * @parameter
-     *  expression = "${couchapp.compiledSourcesDirectory}"
-     * 	default-value = "${project.build.directory}/couchapp/compiled"
-     */
-    protected File compiledSourcesDirectory;
-    
-    /**
-     * The directory to use for packaged couchapps
-     * 
-     * @parameter
-     *  expression = "${couchapp.packageDirectory}"
-     * 	default-value = "${project.build.directory}/couchapp/packages"
-     */
-    protected File packageDirectory;
-    
-    /**
-     * The directory to use for couchapps packaged as maven artifacts
-     * 
-     * @parameter
-     *  expression = "${couchapp.artifactsDirectory}"
-     * 	default-value = "${project.build.directory}/couchapp/artifacts"
-     */
-    protected File artifactsDirectory;
-    
-    public void execute() throws MojoExecutionException
-    {
-    	postConstruct();
-    	final CouchAppRepository inputRepo = getSourceRepo();
-    	final CouchAppRepository outputRepo = getTargetRepo();
-    	for (final String id : inputRepo.listIds())
-    	{
-    		DesignDocument app = inputRepo.retrieve(id);
-    		app = processInternal(app);
-    		outputRepo.update(app);
-    	}
+
+    public void execute() throws MojoExecutionException {
+        postConstruct();
+        final CouchAppRepository inputRepo = getSourceRepo();
+        final CouchAppRepository outputRepo = getTargetRepo();
+        for (final String id : inputRepo.listIds()) {
+            DesignDocument app = inputRepo.retrieve(id);
+            app = processInternal(app);
+            outputRepo.update(app);
+        }
     }
-    
-    protected void postConstruct() {}
-    
-    protected CouchAppRepository getSourceRepo() {
-    	return null;
-    }
-    
-    protected CouchAppRepository getTargetRepo() {
-    	return null;
-    }
-    
+
+    protected void postConstruct() { }
+
+    protected CouchAppRepository getSourceRepo() { return null; }
+
+    protected CouchAppRepository getTargetRepo() { return null; }
+
     protected DesignDocument processInternal(DesignDocument doc)
-    	throws MojoExecutionException {
-    	return doc;
+            throws MojoExecutionException {
+        return doc;
     }
-    
-    protected Database getDatabase()
-    {
-    	return new Database(getServer(), database);
+
+    protected File getTargetDir(final String relative) {
+        return new File(targetDirectory, relative);
     }
-    
-    protected Server getServer()
-    {
-    	final ServerImpl server = new ServerImpl(host, port);
-    	if (!StringUtils.isBlank(username))
-    	{
-    		final Credentials creds = 
-    				new UsernamePasswordCredentials(username, password);
-    		server.setCredentials(AuthScope.ANY, creds);
-    	}
-    	return server;
-    }
-    
-    protected JSON getJSON()
-    {
-    	return JSON.defaultJSON();
-    }
+
+    protected final File getArtifactDir() { return getTargetDir("artifacts"); }
+    protected final File getCompiledDir() { return getTargetDir("compiled"); }
+    protected final File getExpandedDir() { return getTargetDir("expanded"); }
+    protected final File getSourceDir() { return sourceDirectory; }
+    protected final File getPackagedDir() { return getTargetDir("packaged"); }
+
+    protected JSON getJSON() { return JSON.defaultJSON(); }
 }

@@ -31,7 +31,7 @@ import org.svenson.JSON;
  * @requiresProject false
  * @requiresDirectInvocation true
  */
-public class GetDocumentMojo extends AbstractCouchMojo
+public class GetDocumentMojo extends AbstractOnlineCouchMojo
 {
     /**
      * @parameter expression="${couchapp.documentId}"

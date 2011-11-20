@@ -25,53 +25,49 @@ import org.jcouchdb.document.DesignDocument;
 
 /**
  * Standalone goal which pushes one or more couch apps to Couch DB
- *
+ * 
  * @author dth
  * 
  * @execute phase="package"
  * @goal push
  * @requiresDirectInvocation true
  */
-public class PushMojo extends AbstractCouchMojo
-{
+public class PushMojo extends AbstractOnlineCouchMojo {
     private CouchAppRepository inputRepo;
-    
-    private CouchAppRepository outputRepo;
-  
-    protected void postConstruct()
-    {
-    	inputRepo = new SingleFilePerCouchAppRepository(packageDirectory);
-    	outputRepo = new CouchDBCouchAppRepository(getDatabase());	
-    }
-        
-    @Override
-	protected CouchAppRepository getSourceRepo() { return inputRepo; }
 
-	@Override
-	protected CouchAppRepository getTargetRepo() { return outputRepo; }
-	
-	@Override
-	protected DesignDocument processInternal(DesignDocument design) {
-		final DesignDocument current =
-				getOrCreateDesignDocument(toId(design));
-		
-		if (!isBlank(current.getRevision()))
-			design.setRevision(current.getRevision());
-		
-		return design;
-	}
-    
-    private DesignDocument getOrCreateDesignDocument(final String application)
-    {
-    	final DesignDocument design = new DesignDocument(application);
-		try
-		{
-			final DesignDocument current =
-					outputRepo.retrieve(application);
-			design.setRevision(current.getRevision());
-		}
-		catch (Exception e) {} // FIXME
-		
-		return design;
-    }    
+    private CouchAppRepository outputRepo;
+
+    protected void postConstruct() {
+        inputRepo = new SingleFilePerCouchAppRepository(getPackagedDir());
+        outputRepo = new CouchDBCouchAppRepository(getDatabase());
+    }
+
+    @Override
+    protected CouchAppRepository getSourceRepo() { return inputRepo; }
+
+    @Override
+    protected CouchAppRepository getTargetRepo() { return outputRepo; }
+
+    @Override
+    protected DesignDocument processInternal(DesignDocument design) {
+        final DesignDocument current =
+                getOrCreateDesignDocument(toId(design));
+
+        if (!isBlank(current.getRevision()))
+            design.setRevision(current.getRevision());
+
+        return design;
+    }
+
+    private DesignDocument getOrCreateDesignDocument(final String application) {
+        final DesignDocument design = new DesignDocument(application);
+        try {
+            final DesignDocument current = outputRepo.retrieve(application);
+            design.setRevision(current.getRevision());
+        } catch (Exception e) {
+            getLog().error("Caught exception while pushing application: " + application, e);
+        }
+
+        return design;
+    }
 }

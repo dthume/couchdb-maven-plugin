@@ -48,7 +48,7 @@ public class ExpandIncludesMojo extends AbstractCouchMojo
     	inputRepo =
     		new FilesystemCouchAppRepository(sourceDirectory);
     	outputRepo =
-    		new FilesystemCouchAppRepository(expandedSourcesDirectory);
+    		new FilesystemCouchAppRepository(getExpandedDir());
     }
     
     @Override

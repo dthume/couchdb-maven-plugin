@@ -42,8 +42,8 @@ public class PackageMojo extends AbstractCouchMojo
 	protected void postConstruct()
     {
     	inputRepo =
-    		new FilesystemCouchAppRepository(compiledSourcesDirectory);
+    		new FilesystemCouchAppRepository(getCompiledDir());
     	outputRepo =
-        	new SingleFilePerCouchAppRepository(packageDirectory);
+        	new SingleFilePerCouchAppRepository(getPackagedDir());
     }
 }

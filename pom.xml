@@ -1,8 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="
     http://maven.apache.org/POM/4.0.0
     http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <prerequisites>
+    <maven>3.0</maven>
+  </prerequisites>
   
   <modelVersion>4.0.0</modelVersion>
 
@@ -15,7 +20,7 @@
   <url>https://github.com/dthume/couchdb-maven-plugin</url>
 
   <description>
-    CouchApp...for Maven!
+    Tools for interacting with Couch DB from Maven.
     
     Adds a `couchapp` packaging type (ensure `extensions` is set to
     `true` when declaring the plugin dependency), and a set of
@@ -45,7 +50,7 @@
       <id>dthu.me.web</id>
       <name>Couchapp Maven Website</name>
       <url>
-        scp://dthu.me/home/dth/sites/org/dthume/couchapp/couchdb-maven-plugin/${project.version}/
+        scp://dthu.me/home/dth/sites/org/dthume/couchdb/${project.artifactId}/${project.version}/
       </url>
     </site>
   </distributionManagement>
@@ -129,7 +134,8 @@
       <version>${ro.isdc.wro4j.version}</version>
     </dependency>
     <!--
-      Required because wro4j-extensions (above) does not correctly declare it
+      Required because the Google Closure Compiler, pulled in by
+      wro4j-extensions (above) needs it. 
     -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -140,6 +146,33 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>com.mycila.maven-license-plugin</groupId>
+        <artifactId>maven-license-plugin</artifactId>
+        <version>1.9.0</version>
+        <configuration>
+          <header>src/etc/header.txt</header>
+          <strictCheck>true</strictCheck>
+          <properties>
+            <owner.email>dth at dthu.me</owner.email>
+            <owner.name>David Thomas Hume</owner.name>
+            <year>2011</year>
+          </properties>
+          <excludes>
+            <exclude>target/**</exclude>
+            <exclude>.gitignore</exclude>
+            <exclude>README.asciidoc</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
@@ -166,18 +199,30 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>com.mycila.maven-license-plugin</groupId>
-        <artifactId>maven-license-plugin</artifactId>
-        <version>1.9.0</version>
-        <configuration>
-          <header>src/etc/header.txt</header>
-          <strictCheck>true</strictCheck>
-          <excludes>
-            <exclude>target/**</exclude>
-            <exclude>.gitignore</exclude>
-            <exclude>README.asciidoc</exclude>
-          </excludes>
-        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.1.2</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.8</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.agilejava.docbkx</groupId>

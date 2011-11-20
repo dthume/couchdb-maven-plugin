@@ -50,7 +50,7 @@ public class AttachArtifactsMojo extends AbstractCouchMojo
     protected void postConstruct()
     {
     	inputRepo =
-    		new SingleFilePerCouchAppRepository(artifactsDirectory);
+    	        new SingleFilePerCouchAppRepository(getArtifactDir());
     }
     
     public void execute() throws MojoExecutionException

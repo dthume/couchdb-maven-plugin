@@ -42,8 +42,8 @@ public class CompressArtifactsMojo extends AbstractCouchMojo
 	protected void postConstruct()
     {
     	inputRepo =
-    		new SingleFilePerCouchAppRepository(packageDirectory);
+    		new SingleFilePerCouchAppRepository(getPackagedDir());
     	outputRepo =
-        	new CompressingSingleFilePerCouchAppRepository(artifactsDirectory);
+        	new CompressingSingleFilePerCouchAppRepository(getArtifactDir());
     }
 }

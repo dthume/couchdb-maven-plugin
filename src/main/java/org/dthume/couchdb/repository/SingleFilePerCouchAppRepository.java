@@ -16,8 +16,6 @@
 package org.dthume.couchdb.repository;
 
 import static org.apache.commons.io.FileUtils.listFiles;
-import static org.apache.commons.io.FileUtils.readFileToString;
-
 import static org.dthume.couchdb.model.CouchAppConstants.toId;
 
 import java.io.File;
