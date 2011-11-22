@@ -17,7 +17,8 @@
   <packaging>maven-plugin</packaging>
 
   <name>CouchDB Maven Plugin</name>
-  <url>https://github.com/dthume/couchdb-maven-plugin</url>
+  <inceptionYear>2011</inceptionYear>
+  <url>https://github.com/dthume/${project.artifactId}</url>
 
   <description>
     Tools for interacting with Couch DB from Maven.
@@ -35,14 +36,14 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:git://github.com/dthume/couchdb-maven-plugin.git</connection>
-    <developerConnection>scm:git:https://dthume@github.com/dthume/couchdb-maven-plugin.git</developerConnection>
-    <url>https://github.com/dthume/couchdb-maven-plugin</url>
+    <connection>scm:git:git://github.com/dthume/${project.artifactId}.git</connection>
+    <developerConnection>scm:git:https://dthume@github.com/dthume/${project.artifactId}.git</developerConnection>
+    <url>https://github.com/dthume/${project.artifactId}</url>
   </scm>
   
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/dthume/couchdb-maven-plugin/issues</url>
+    <url>https://github.com/dthume/${project.artifactId}/issues</url>
   </issueManagement>
   
   <distributionManagement>
@@ -58,8 +59,8 @@
   <developers>
     <developer>
       <id>dth</id>
-      <name>David Thomas Hume</name>
-      <email>dth@dthu.me</email>
+      <name>${projectowner.fullname}</name>
+      <email>${projectowner.email}</email>
       <url>http://dthu.me</url>
       <organization>Kana</organization>
       <organizationUrl>http://www.kana.com</organizationUrl>
@@ -74,6 +75,9 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.lang.version>1.5</java.lang.version>
+    
+    <projectowner.fullname>David Thomas Hume</projectowner.fullname>
+    <projectowner.email>dth@dthu.me</projectowner.email>
 
     <docbook.target.directory>
       ${project.build.directory}/docbook
@@ -82,55 +86,86 @@
       ${docbook.target.directory}/xhtml
     </docbook.xhtml.target.directory>
     
-    <!-- Versioning -->
+    <!-- Dependency Versioning -->
+    <com.google.code.jcouchdb.version>0.11.0-1</com.google.code.jcouchdb.version>
+    <commons-io.version>2.1</commons-io.version>
+    <javax.servlet.servlet-api.version>2.5</javax.servlet.servlet-api.version>
+    <junit.version>3.8.1</junit.version>
+    <org.apache.commons.commons-lang3.version>3.0.1</org.apache.commons.commons-lang3.version>
+    <org.apache.httpcomponents.httpclient.version>4.1.2</org.apache.httpcomponents.httpclient.version>
+    <org.apache.maven.version>3.0.3</org.apache.maven.version>
+    <org.sonatype.aether.version>1.8</org.sonatype.aether.version>
     <ro.isdc.wro4j.version>1.4.1</ro.isdc.wro4j.version>
+    
+    <!-- Plugin versioning -->
+    <com.agilejava.docbkx.docbkx-maven-plugin.version>2.0.10</com.agilejava.docbkx.docbkx-maven-plugin.version>
+    <com.mycila.maven-license-plugin.version>1.9.0</com.mycila.maven-license-plugin.version>
+    <net.sf.xslthl.version>2.0.2</net.sf.xslthl.version>
+    <org.apache.maven.plugins.maven-changes-plugin.version>2.6</org.apache.maven.plugins.maven-changes-plugin.version>
+    <org.apache.maven.plugins.maven-checkstyle-plugin.version>2.8</org.apache.maven.plugins.maven-checkstyle-plugin.version>
+    <org.apache.maven.plugins.maven-compiler-plugin.version>2.3.2</org.apache.maven.plugins.maven-compiler-plugin.version>
+    <org.apache.maven.plugins.maven-eclipse-plugin.version>2.8</org.apache.maven.plugins.maven-eclipse-plugin.version>
+    <org.apache.maven.plugins.maven-javadoc-plugin.version>2.8</org.apache.maven.plugins.maven-javadoc-plugin.version>
+    <org.apache.maven.plugins.maven-jxr-plugin.version>2.3</org.apache.maven.plugins.maven-jxr-plugin.version>
+    <org.apache.maven.plugins.maven-plugin-plugin.version>2.9</org.apache.maven.plugins.maven-plugin-plugin.version>
+    <org.apache.maven.plugins.maven-pmd-plugin.version>2.6</org.apache.maven.plugins.maven-pmd-plugin.version>
+    <org.apache.maven.plugins.maven-project-info-reports-plugin.version>2.2</org.apache.maven.plugins.maven-project-info-reports-plugin.version>
+    <org.apache.maven.plugins.maven-release-plugin.version>2.2.1</org.apache.maven.plugins.maven-release-plugin.version>
+    <org.apache.maven.plugins.maven-site-plugin.version>3.0-beta-3</org.apache.maven.plugins.maven-site-plugin.version>
+    <org.apache.maven.plugins.maven-source-plugin.version>2.1.2</org.apache.maven.plugins.maven-source-plugin.version>
+    <org.apache.maven.plugins.maven-surefire-report-plugin.version>2.10</org.apache.maven.plugins.maven-surefire-report-plugin.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-api</artifactId>
-      <version>2.0</version>
+      <version>${org.apache.maven.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-core</artifactId>
-      <version>3.0.3</version>
+      <version>${org.apache.maven.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
-      <version>4.1.2</version>
+      <version>${org.apache.httpcomponents.httpclient.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
-      <version>2.1</version>
+      <version>${commons-io.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.0.1</version>
+      <version>${org.apache.commons.commons-lang3.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.aether</groupId>
+      <artifactId>aether-api</artifactId>
+      <version>${org.sonatype.aether.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.aether</groupId>
+      <artifactId>aether-util</artifactId>
+      <version>${org.sonatype.aether.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.jcouchdb</groupId>
       <artifactId>jcouchdb</artifactId>
-      <version>0.11.0-1</version>
+      <version>${com.google.code.jcouchdb.version}</version>
     </dependency>
     <dependency>
       <groupId>ro.isdc.wro4j</groupId>
       <artifactId>wro4j-core</artifactId>
-      <version>${ro.isdc.wro4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>ro.isdc.wro4j</groupId>
-      <artifactId>wro4j-extensions</artifactId>
       <version>${ro.isdc.wro4j.version}</version>
     </dependency>
     <!--
@@ -140,7 +175,7 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
+      <version>${javax.servlet.servlet-api.version}</version>
     </dependency>
   </dependencies>
 
@@ -149,14 +184,14 @@
       <plugin>
         <groupId>com.mycila.maven-license-plugin</groupId>
         <artifactId>maven-license-plugin</artifactId>
-        <version>1.9.0</version>
+        <version>${com.mycila.maven-license-plugin.version}</version>
         <configuration>
           <header>src/etc/header.txt</header>
           <strictCheck>true</strictCheck>
           <properties>
-            <owner.email>dth at dthu.me</owner.email>
-            <owner.name>David Thomas Hume</owner.name>
             <year>2011</year>
+            <owner.fullname>${projectowner.fullname}</owner.fullname>
+            <owner.email>${projectowner.email}</owner.email>
           </properties>
           <excludes>
             <exclude>target/**</exclude>
@@ -176,7 +211,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
-        <version>2.5.1</version>
+        <version>${org.apache.maven.plugins.maven-plugin-plugin.version}</version>
         <configuration>
           <goalPrefix>couchdb</goalPrefix>
         </configuration>
@@ -192,7 +227,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
+        <version>${org.apache.maven.plugins.maven-compiler-plugin.version}</version>
         <configuration>
           <sourceVersion>${java.lang.version}</sourceVersion>
           <targetVersion>${java.lang.version}</targetVersion>
@@ -201,7 +236,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>2.1.2</version>
+        <version>${org.apache.maven.plugins.maven-source-plugin.version}</version>
         <executions>
           <execution>
             <id>attach-sources</id>
@@ -214,7 +249,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.8</version>
+        <version>${org.apache.maven.plugins.maven-javadoc-plugin.version}</version>
         <executions>
           <execution>
             <id>attach-javadocs</id>
@@ -227,7 +262,7 @@
       <plugin>
         <groupId>com.agilejava.docbkx</groupId>
         <artifactId>docbkx-maven-plugin</artifactId>
-        <version>2.0.10</version>
+        <version>${com.agilejava.docbkx.docbkx-maven-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -259,7 +294,7 @@
           <dependency>
             <groupId>net.sf.xslthl</groupId>
             <artifactId>xslthl</artifactId>
-            <version>2.0.2</version>
+            <version>${net.sf.xslthl.version}</version>
             <scope>runtime</scope>
           </dependency>
         </dependencies>
@@ -267,13 +302,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.0-beta-3</version>
+        <version>${org.apache.maven.plugins.maven-site-plugin.version}</version>
         <configuration>
           <reportPlugins>
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-project-info-reports-plugin</artifactId>
-              <version>2.2</version>
+              <version>${org.apache.maven.plugins.maven-project-info-reports-plugin.version}</version>
               <configuration>
                 <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
                 <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
@@ -282,27 +317,27 @@
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-javadoc-plugin</artifactId>
-              <version>2.7</version>
+              <version>${org.apache.maven.plugins.maven-javadoc-plugin.version}</version>
             </plugin>
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-plugin-plugin</artifactId>
-              <version>2.9</version>
+              <version>${org.apache.maven.plugins.maven-plugin-plugin.version}</version>
             </plugin>
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-checkstyle-plugin</artifactId>
-              <version>2.8</version>
+              <version>${org.apache.maven.plugins.maven-checkstyle-plugin.version}</version>
             </plugin>
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-jxr-plugin</artifactId>
-              <version>2.3</version>
+              <version>${org.apache.maven.plugins.maven-jxr-plugin.version}</version>
             </plugin>
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-pmd-plugin</artifactId>
-              <version>2.6</version>
+              <version>${org.apache.maven.plugins.maven-pmd-plugin.version}</version>
               <configuration>
                 <targetJdk>${java.lang.version}</targetJdk>
               </configuration>
@@ -310,12 +345,12 @@
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-surefire-report-plugin</artifactId>
-              <version>2.10</version>
+              <version>${org.apache.maven.plugins.maven-surefire-report-plugin.version}</version>
             </plugin>
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-changes-plugin</artifactId>
-              <version>2.6</version>
+              <version>${org.apache.maven.plugins.maven-changes-plugin.version}</version>
               <reportSets>
                 <reportSet>
                   <reports>
@@ -330,7 +365,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.2.1</version>
+        <version>${org.apache.maven.plugins.maven-release-plugin.version}</version>
         <configuration>
           <localCheckout>true</localCheckout>
           <pushChanges>false</pushChanges>
@@ -339,7 +374,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.8</version>
+        <version>${org.apache.maven.plugins.maven-eclipse-plugin.version}</version>
         <configuration>
           <downloadSources>true</downloadSources>
           <downloadJavadocs>true</downloadJavadocs>

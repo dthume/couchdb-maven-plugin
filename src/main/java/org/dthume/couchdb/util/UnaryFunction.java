@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011 David Thomas Hume <dth at dthu.me>
+ * Copyright (C) 2011 David Thomas Hume <dth@dthu.me>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dthume.couchdb.model;
+package org.dthume.couchdb.util;
 
-public interface CouchApp {
-	
-	String getId();
-	
-	
+public interface UnaryFunction<A, R> {
+    R call(A arg);
 }

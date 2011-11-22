@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011 David Thomas Hume <dth at dthu.me>
+ * Copyright (C) 2011 David Thomas Hume <dth@dthu.me>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package org.dthume.couchdb.maven;
 
 import java.io.File;
 
+import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.dthume.couchdb.repository.CouchAppRepository;

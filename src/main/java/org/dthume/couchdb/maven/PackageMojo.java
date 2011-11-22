@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011 David Thomas Hume <dth at dthu.me>
+ * Copyright (C) 2011 David Thomas Hume <dth@dthu.me>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,30 +20,27 @@ import org.dthume.couchdb.repository.FilesystemCouchAppRepository;
 import org.dthume.couchdb.repository.SingleFilePerCouchAppRepository;
 
 /**
- * Packages a couchapp in preparation for deployment to couch db or an
- * artifact repository.
- *
+ * Packages a couchapp in preparation for deployment to couch db or an artifact
+ * repository.
+ * 
  * @author dth
  * 
  * @goal package
  */
-public class PackageMojo extends AbstractCouchMojo
-{
-    private CouchAppRepository inputRepo;
-    private SingleFilePerCouchAppRepository outputRepo;
+public class PackageMojo extends AbstractCouchMojo {
     
+    private CouchAppRepository inputRepo;
+    private CouchAppRepository outputRepo;
+
     @Override
-	protected CouchAppRepository getSourceRepo() { return inputRepo; }
+    protected CouchAppRepository getSourceRepo() { return inputRepo; }
 
-	@Override
-	protected CouchAppRepository getTargetRepo() { return outputRepo; }
+    @Override
+    protected CouchAppRepository getTargetRepo() { return outputRepo; }
 
-	@Override
-	protected void postConstruct()
-    {
-    	inputRepo =
-    		new FilesystemCouchAppRepository(getCompiledDir());
-    	outputRepo =
-        	new SingleFilePerCouchAppRepository(getPackagedDir());
+    @Override
+    protected void postConstruct() {
+        inputRepo = new FilesystemCouchAppRepository(getCompiledDir());
+        outputRepo = new SingleFilePerCouchAppRepository(getPackagedDir());
     }
 }

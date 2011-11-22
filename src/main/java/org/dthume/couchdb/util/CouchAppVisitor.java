@@ -13,16 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dthume.couchdb.repository;
+package org.dthume.couchdb.util;
 
-import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
-import org.jcouchdb.document.DesignDocument;
-
-public interface CouchAppRepository {
-	Collection<String> listIds();
-	DesignDocument create(DesignDocument app);
-	DesignDocument retrieve(String id);
-	DesignDocument update(DesignDocument app);
-	boolean delete(DesignDocument app);
+public interface CouchAppVisitor {
+    public enum Status {
+        CONTINUE,
+        SKIP,
+        STOP
+    }
+    
+    Status visitBoolean(String key, boolean value);
+    
+    Status visitString(String key, String value);
+    
+    Status visitNumber(String key, Number number);
+    
+    Status visitArray(String key, List<Object> array);
+    
+    Status visitObject(String key, Map<String, Object> object);
+    
+    Status visitNull(String key);
 }

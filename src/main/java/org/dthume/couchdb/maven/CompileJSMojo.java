@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011 David Thomas Hume <dth at dthu.me>
+ * Copyright (C) 2011 David Thomas Hume <dth@dthu.me>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,17 @@
 package org.dthume.couchdb.maven;
 
 import java.io.IOException;
+import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.codehaus.plexus.util.reflection.Reflector;
+import org.codehaus.plexus.util.reflection.ReflectorException;
 import org.dthume.couchdb.repository.CouchAppRepository;
 import org.dthume.couchdb.repository.FilesystemCouchAppRepository;
 import org.jcouchdb.document.DesignDocument;
@@ -29,7 +34,6 @@ import org.jcouchdb.document.View;
 
 import ro.isdc.wro.config.Context;
 import ro.isdc.wro.config.jmx.WroConfiguration;
-import ro.isdc.wro.extensions.processor.js.GoogleClosureCompressorProcessor;
 import ro.isdc.wro.model.resource.processor.ResourcePostProcessor;
 
 /**
@@ -41,7 +45,7 @@ import ro.isdc.wro.model.resource.processor.ResourcePostProcessor;
  */
 public class CompileJSMojo extends AbstractCouchMojo {
 
-    private final ResourcePostProcessor postProcessor = new GoogleClosureCompressorProcessor();
+    private ResourcePostProcessor postProcessor;
 
     private CouchAppRepository inputRepo;
     private CouchAppRepository outputRepo;
@@ -60,7 +64,16 @@ public class CompileJSMojo extends AbstractCouchMojo {
      * @parameter expression = "${project.build.sourceEncoding}"
      */
     private String sourceEncoding = "UTF-8";
-
+    
+    /**
+     * Compiler processor class
+     * 
+     * @parameter
+     *  expression = "${couchdb.compilerProcessorClass}"
+     *  default-value = "ro.isdc.wro.model.resource.processor.impl.js.JSMinProcessor"
+     */
+    private String processorClass;
+    
     @Override
     protected CouchAppRepository getSourceRepo() {
         return inputRepo;
@@ -87,6 +100,30 @@ public class CompileJSMojo extends AbstractCouchMojo {
         context.setConfig(config);
 
         Context.set(context);
+        
+        initPostProcessor();
+    }
+    
+    private void initPostProcessor() {
+        final ClassLoader cl = Thread.currentThread().getContextClassLoader();
+        try
+        {
+            final Class<?> clazz = Class.forName(processorClass, true, cl);
+            final Reflector reflector = new Reflector();
+            final Object[] args = new Object[] {};
+            postProcessor =
+                (ResourcePostProcessor)reflector.newInstance(clazz, args);
+        } catch (ClassNotFoundException e) {
+            postProcessor = new ResourcePostProcessor() {
+                public void process(final Reader reader, final Writer writer)
+                        throws IOException {
+                    IOUtils.copy(reader, writer);
+                }
+            };
+        } catch (ReflectorException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e); // FIXME
+        }
     }
 
     @Override
@@ -122,8 +159,8 @@ public class CompileJSMojo extends AbstractCouchMojo {
             final StringWriter writer = new StringWriter();
             
             postProcessor.process(reader, writer);
-            
-            result = writer.toString().substring(JS_PREFIX.length());
+            result = writer.toString();
+            result = result.substring(result.indexOf("=") + 1);
         } catch (IOException e) {
             e.printStackTrace(); // FIXME
         }
