@@ -49,7 +49,7 @@ public class GetDocumentMojo extends AbstractOnlineCouchMojo
     {
     	try
     	{
-    		executeInternal();
+    	    executeInternal();
     	}
     	catch (IOException e)
     	{
@@ -79,7 +79,7 @@ public class GetDocumentMojo extends AbstractOnlineCouchMojo
     private void writeJSON(Object document, PrintStream output)
     {
     	output.println(
-        	JSON.formatJSON(
+    	        JSON.formatJSON(
         		JSON.defaultJSON().forValue(document)
         	)
         );

@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
+  
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="
     http://maven.apache.org/POM/4.0.0
     http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  
+
   <prerequisites>
     <maven>3.0</maven>
   </prerequisites>
-  
+
   <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.dthume</groupId>
+    <artifactId>dthume-parent</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <relativePath>../dthume-parent/pom.xml</relativePath>
+  </parent>
 
   <groupId>org.dthume.couchdb</groupId>
   <artifactId>couchdb-maven-plugin</artifactId>
@@ -28,27 +36,15 @@
     standalone mojos for interacting with Couch DB instances.
   </description>
 
-  <licenses>
-  	<license>
-  		<name>Apache</name>
-  		<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-  	</license>
-  </licenses>
-
   <scm>
     <connection>scm:git:git://github.com/dthume/${project.artifactId}.git</connection>
     <developerConnection>scm:git:https://dthume@github.com/dthume/${project.artifactId}.git</developerConnection>
     <url>https://github.com/dthume/${project.artifactId}</url>
   </scm>
-  
-  <issueManagement>
-    <system>GitHub</system>
-    <url>https://github.com/dthume/${project.artifactId}/issues</url>
-  </issueManagement>
-  
+
   <distributionManagement>
     <site>
-      <id>dthu.me.web</id>
+      <id>couchapp.site</id>
       <name>Couchapp Maven Website</name>
       <url>
         scp://dthu.me/home/dth/sites/org/dthume/couchdb/${project.artifactId}/${project.version}/
@@ -56,37 +52,7 @@
     </site>
   </distributionManagement>
 
-  <developers>
-    <developer>
-      <id>dth</id>
-      <name>${projectowner.fullname}</name>
-      <email>${projectowner.email}</email>
-      <url>http://dthu.me</url>
-      <organization>Kana</organization>
-      <organizationUrl>http://www.kana.com</organizationUrl>
-      <roles>
-        <role>architect</role>
-        <role>developer</role>
-      </roles>
-      <timezone>0</timezone>
-    </developer>
-  </developers>
-  
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.lang.version>1.5</java.lang.version>
-    
-    <projectowner.fullname>David Thomas Hume</projectowner.fullname>
-    <projectowner.email>dth@dthu.me</projectowner.email>
-
-    <docbook.target.directory>
-      ${project.build.directory}/docbook
-    </docbook.target.directory>    
-    <docbook.xhtml.target.directory>
-      ${docbook.target.directory}/xhtml
-    </docbook.xhtml.target.directory>
-    
-    <!-- Dependency Versioning -->
     <com.google.code.jcouchdb.version>0.11.0-1</com.google.code.jcouchdb.version>
     <commons-io.version>2.1</commons-io.version>
     <javax.servlet.servlet-api.version>2.5</javax.servlet.servlet-api.version>
@@ -94,26 +60,9 @@
     <org.apache.commons.commons-lang3.version>3.0.1</org.apache.commons.commons-lang3.version>
     <org.apache.httpcomponents.httpclient.version>4.1.2</org.apache.httpcomponents.httpclient.version>
     <org.apache.maven.version>3.0.3</org.apache.maven.version>
+    <org.dthume.dthume-docbook.version>0.1-SNAPSHOT</org.dthume.dthume-docbook.version>
     <org.sonatype.aether.version>1.8</org.sonatype.aether.version>
     <ro.isdc.wro4j.version>1.4.1</ro.isdc.wro4j.version>
-    
-    <!-- Plugin versioning -->
-    <com.agilejava.docbkx.docbkx-maven-plugin.version>2.0.10</com.agilejava.docbkx.docbkx-maven-plugin.version>
-    <com.mycila.maven-license-plugin.version>1.9.0</com.mycila.maven-license-plugin.version>
-    <net.sf.xslthl.version>2.0.2</net.sf.xslthl.version>
-    <org.apache.maven.plugins.maven-changes-plugin.version>2.6</org.apache.maven.plugins.maven-changes-plugin.version>
-    <org.apache.maven.plugins.maven-checkstyle-plugin.version>2.8</org.apache.maven.plugins.maven-checkstyle-plugin.version>
-    <org.apache.maven.plugins.maven-compiler-plugin.version>2.3.2</org.apache.maven.plugins.maven-compiler-plugin.version>
-    <org.apache.maven.plugins.maven-eclipse-plugin.version>2.8</org.apache.maven.plugins.maven-eclipse-plugin.version>
-    <org.apache.maven.plugins.maven-javadoc-plugin.version>2.8</org.apache.maven.plugins.maven-javadoc-plugin.version>
-    <org.apache.maven.plugins.maven-jxr-plugin.version>2.3</org.apache.maven.plugins.maven-jxr-plugin.version>
-    <org.apache.maven.plugins.maven-plugin-plugin.version>2.9</org.apache.maven.plugins.maven-plugin-plugin.version>
-    <org.apache.maven.plugins.maven-pmd-plugin.version>2.6</org.apache.maven.plugins.maven-pmd-plugin.version>
-    <org.apache.maven.plugins.maven-project-info-reports-plugin.version>2.2</org.apache.maven.plugins.maven-project-info-reports-plugin.version>
-    <org.apache.maven.plugins.maven-release-plugin.version>2.2.1</org.apache.maven.plugins.maven-release-plugin.version>
-    <org.apache.maven.plugins.maven-site-plugin.version>3.0-beta-3</org.apache.maven.plugins.maven-site-plugin.version>
-    <org.apache.maven.plugins.maven-source-plugin.version>2.1.2</org.apache.maven.plugins.maven-source-plugin.version>
-    <org.apache.maven.plugins.maven-surefire-report-plugin.version>2.10</org.apache.maven.plugins.maven-surefire-report-plugin.version>
   </properties>
 
   <dependencies>
@@ -168,217 +117,41 @@
       <artifactId>wro4j-core</artifactId>
       <version>${ro.isdc.wro4j.version}</version>
     </dependency>
-    <!--
-      Required because the Google Closure Compiler, pulled in by
-      wro4j-extensions (above) needs it. 
-    -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>${javax.servlet.servlet-api.version}</version>
-    </dependency>
   </dependencies>
 
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+      </plugin>
+      <plugin>
         <groupId>com.mycila.maven-license-plugin</groupId>
         <artifactId>maven-license-plugin</artifactId>
-        <version>${com.mycila.maven-license-plugin.version}</version>
-        <configuration>
-          <header>src/etc/header.txt</header>
-          <strictCheck>true</strictCheck>
-          <properties>
-            <year>2011</year>
-            <owner.fullname>${projectowner.fullname}</owner.fullname>
-            <owner.email>${projectowner.email}</owner.email>
-          </properties>
-          <excludes>
-            <exclude>target/**</exclude>
-            <exclude>.gitignore</exclude>
-            <exclude>README.asciidoc</exclude>
-          </excludes>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
-        <version>${org.apache.maven.plugins.maven-plugin-plugin.version}</version>
-        <configuration>
-          <goalPrefix>couchdb</goalPrefix>
-        </configuration>
-        <executions>
-          <execution>
-            <id>generated-helpmojo</id>
-            <goals>
-              <goal>helpmojo</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>${org.apache.maven.plugins.maven-compiler-plugin.version}</version>
-        <configuration>
-          <sourceVersion>${java.lang.version}</sourceVersion>
-          <targetVersion>${java.lang.version}</targetVersion>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>${org.apache.maven.plugins.maven-source-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>${org.apache.maven.plugins.maven-javadoc-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>com.agilejava.docbkx</groupId>
         <artifactId>docbkx-maven-plugin</artifactId>
-        <version>${com.agilejava.docbkx.docbkx-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate-xhtml</goal>
-            </goals>
-            <phase>pre-site</phase>
-          </execution>
-        </executions>
-        <configuration>
-          <!-- General Config -->
-          <chunkedOutput>false</chunkedOutput>
-          <generatedSourceDirectory>${docbook.target.directory}/xinclude</generatedSourceDirectory>
-          <highlightSource>1</highlightSource>
-          <targetDirectory>${docbook.xhtml.target.directory}</targetDirectory>
-          <includes>docbook/*.xml</includes>
-          <xincludeSupported>true</xincludeSupported>
-          <!-- Customisation Stylesheets -->
-          <xhtmlCustomization>
-            ${basedir}/src/docbkx/xsl/db-xhtml-customizations.xsl
-          </xhtmlCustomization>
-          <!-- Custom Processing -->
-          <postProcess>
-            <copy todir="${project.build.directory}/generated-site/xhtml">
-              <fileset dir="${docbook.xhtml.target.directory}/docbook" />
-            </copy>
-          </postProcess>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>net.sf.xslthl</groupId>
-            <artifactId>xslthl</artifactId>
-            <version>${net.sf.xslthl.version}</version>
-            <scope>runtime</scope>
-          </dependency>
-        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>${org.apache.maven.plugins.maven-site-plugin.version}</version>
-        <configuration>
-          <reportPlugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-project-info-reports-plugin</artifactId>
-              <version>${org.apache.maven.plugins.maven-project-info-reports-plugin.version}</version>
-              <configuration>
-                <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-                <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-              </configuration>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-javadoc-plugin</artifactId>
-              <version>${org.apache.maven.plugins.maven-javadoc-plugin.version}</version>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-plugin-plugin</artifactId>
-              <version>${org.apache.maven.plugins.maven-plugin-plugin.version}</version>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-checkstyle-plugin</artifactId>
-              <version>${org.apache.maven.plugins.maven-checkstyle-plugin.version}</version>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-jxr-plugin</artifactId>
-              <version>${org.apache.maven.plugins.maven-jxr-plugin.version}</version>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-pmd-plugin</artifactId>
-              <version>${org.apache.maven.plugins.maven-pmd-plugin.version}</version>
-              <configuration>
-                <targetJdk>${java.lang.version}</targetJdk>
-              </configuration>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-surefire-report-plugin</artifactId>
-              <version>${org.apache.maven.plugins.maven-surefire-report-plugin.version}</version>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-changes-plugin</artifactId>
-              <version>${org.apache.maven.plugins.maven-changes-plugin.version}</version>
-              <reportSets>
-                <reportSet>
-                  <reports>
-                    <report>changes-report</report>
-                  </reports>
-                </reportSet>
-              </reportSets>
-            </plugin>
-          </reportPlugins>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>${org.apache.maven.plugins.maven-release-plugin.version}</version>
-        <configuration>
-          <localCheckout>true</localCheckout>
-          <pushChanges>false</pushChanges>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <version>${org.apache.maven.plugins.maven-eclipse-plugin.version}</version>
-        <configuration>
-          <downloadSources>true</downloadSources>
-          <downloadJavadocs>true</downloadJavadocs>
-        </configuration>
       </plugin>
     </plugins>
   </build>

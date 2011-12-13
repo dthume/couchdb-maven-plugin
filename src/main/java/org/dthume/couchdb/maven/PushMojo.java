@@ -65,7 +65,7 @@ public class PushMojo extends AbstractOnlineCouchMojo {
             final DesignDocument current = outputRepo.retrieve(application);
             design.setRevision(current.getRevision());
         } catch (Exception e) {
-            getLog().error("Caught exception while pushing application: " + application, e);
+            getLog().error("Caught exception while retrieving current version of application: " + application, e);
         }
 
         return design;

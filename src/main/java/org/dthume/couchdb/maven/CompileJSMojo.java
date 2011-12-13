@@ -37,7 +37,7 @@ import ro.isdc.wro.config.jmx.WroConfiguration;
 import ro.isdc.wro.model.resource.processor.ResourcePostProcessor;
 
 /**
- * Compress the JavaScript use for view / show etc. functions.
+ * Compress the JavaScript used for view / show etc. functions.
  * 
  * @author dth
  * 
@@ -135,20 +135,20 @@ public class CompileJSMojo extends AbstractCouchMojo {
             getLog().debug("Compiling JS in design document: " + doc.getId());
 
             for (Map.Entry<String, View> entry : doc.getViews().entrySet())
-                compressView(entry.getValue());
+                compileView(entry.getValue());
         }
 
         return doc;
     }
 
-    private void compressView(View view) {
-        view.setMap(compressJS(view.getMap()));
-        view.setReduce(compressJS(view.getReduce()));
+    private void compileView(View view) {
+        view.setMap(compileJS(view.getMap()));
+        view.setReduce(compileJS(view.getReduce()));
     }
 
     private final static String JS_PREFIX = "var __couchapp_anon_function__=";
 
-    private String compressJS(String js) {
+    private String compileJS(String js) {
         if (StringUtils.isBlank(js))
             return js;
 

@@ -33,84 +33,76 @@ import org.jcouchdb.document.View;
 
 /**
  * Expands include (!code [FILE]) comments in couch app files
- *
+ * 
  * @author dth
  * 
  * @goal expand-includes
  */
-public class ExpandIncludesMojo extends AbstractCouchMojo
-{
+public class ExpandIncludesMojo extends AbstractCouchMojo {
     private CouchAppRepository inputRepo;
     private CouchAppRepository outputRepo;
-    
-    protected void postConstruct()
-    {
-    	inputRepo =
-    		new FilesystemCouchAppRepository(sourceDirectory);
-    	outputRepo =
-    		new FilesystemCouchAppRepository(getExpandedDir());
-    }
-    
-    @Override
-	protected CouchAppRepository getSourceRepo() { return inputRepo; }
-    
-	@Override
-	protected CouchAppRepository getTargetRepo() { return outputRepo; }
 
-	@Override
+    protected void postConstruct() {
+        inputRepo = new FilesystemCouchAppRepository(sourceDirectory);
+        outputRepo = new FilesystemCouchAppRepository(getExpandedDir());
+    }
+
+    @Override
+    protected CouchAppRepository getSourceRepo() {
+        return inputRepo;
+    }
+
+    @Override
+    protected CouchAppRepository getTargetRepo() {
+        return outputRepo;
+    }
+
+    @Override
     protected DesignDocument processInternal(final DesignDocument doc)
-    	throws MojoExecutionException
-    {
-		getLog().info("Expanding includes for app: " + toId(doc));
-    	try
-    	{
-    		expandAppIncludes(doc);
-    		return doc;
-    	}
-    	catch (IOException e)
-    	{
-    		throw new MojoExecutionException("Caught IOException while expanding includes", e);
-    	}
+            throws MojoExecutionException {
+        getLog().info("Expanding includes for app: " + toId(doc));
+        try {
+            expandAppIncludes(doc);
+            return doc;
+        } catch (IOException e) {
+            throw new MojoExecutionException(
+                    "Caught IOException while expanding includes", e);
+        }
     }
-    
-    private void expandAppIncludes(final DesignDocument doc)
-    	throws IOException
-    {
-    	for (final Map.Entry<String, View> entry : doc.getViews().entrySet())
-    		expandIncludeReferences(entry.getValue());
+
+    private void expandAppIncludes(final DesignDocument doc) throws IOException {
+        for (final Map.Entry<String, View> entry : doc.getViews().entrySet())
+            expandIncludeReferences(entry.getValue());
     }
-    
-    private void expandIncludeReferences(final View view)
-    	throws IOException
-    {
-    	view.setMap(expandIncludeReferences(view.getMap()));
-    	view.setReduce(expandIncludeReferences(view.getReduce()));
+
+    private void expandIncludeReferences(final View view) throws IOException {
+        view.setMap(expandIncludeReferences(view.getMap()));
+        view.setReduce(expandIncludeReferences(view.getReduce()));
     }
-    
-    private final static Pattern INCLUDES_PATTERN =
-        	Pattern.compile("^\\s*//\\s*!code\\s+([^\\s]+)\\s*$",
-        			Pattern.MULTILINE);
-    
-    private String expandIncludeReferences(final String js)
-    	throws IOException {
-    	if (null == js) return js;
-    	
-		final StringBuffer sb = new StringBuffer();
-		
-		final Matcher matcher = INCLUDES_PATTERN.matcher(js);
-		while (matcher.find()) {
-			final String replacement =
-				expandIncludeReferences(readInclude(matcher.group(1)));
-			matcher.appendReplacement(sb, replacement);
-			sb.append("\n");
-		}
-		matcher.appendTail(sb);
-		
-		return sb.toString();
+
+    private final static Pattern INCLUDES_PATTERN = Pattern.compile(
+            "^\\s*//\\s*!code\\s+([^\\s]+)\\s*$", Pattern.MULTILINE);
+
+    private String expandIncludeReferences(final String js) throws IOException {
+        if (null == js)
+            return js;
+
+        final StringBuffer sb = new StringBuffer();
+
+        final Matcher matcher = INCLUDES_PATTERN.matcher(js);
+        while (matcher.find()) {
+            final String replacement =
+                    expandIncludeReferences(readInclude(matcher.group(1)));
+            matcher.appendReplacement(sb, replacement);
+            sb.append("\n");
+        }
+        matcher.appendTail(sb);
+
+        return sb.toString();
     }
-    
+
     private String readInclude(String include) throws IOException {
-    	final File base = new File(webappDirectory, scriptsDirectory);
-		return readFileToString(new File(base, include));
-	}
+        final File base = new File(webappDirectory, scriptsDirectory);
+        return readFileToString(new File(base, include));
+    }
 }
