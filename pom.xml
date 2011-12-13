@@ -16,7 +16,7 @@
     <groupId>org.dthume</groupId>
     <artifactId>dthume-parent</artifactId>
     <version>0.1-SNAPSHOT</version>
-    <relativePath>../dthume-parent/pom.xml</relativePath>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <groupId>org.dthume.couchdb</groupId>
