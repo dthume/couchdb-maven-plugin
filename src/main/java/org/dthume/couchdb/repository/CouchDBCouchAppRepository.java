@@ -34,23 +34,19 @@ public class CouchDBCouchAppRepository
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	public DesignDocument create(DesignDocument app) {
 		return update(app);
 	}
 
-	@Override
 	public DesignDocument retrieve(String id) {
 		return database.getDesignDocument(id);
 	}
 
-	@Override
 	public DesignDocument update(DesignDocument app) {
 		database.createOrUpdateDocument(app);
 		return database.getDesignDocument(CouchAppConstants.toId(app));
 	}
 
-	@Override
 	public boolean delete(DesignDocument app) {
 		database.delete(app);
 		return true;
