@@ -47,7 +47,7 @@
       <id>couchapp.site</id>
       <name>Couchapp Maven Website</name>
       <url>
-        file://opt/maven/sites/org/dthume/couchdb/${project.artifactId}/${project.version}/
+        file:///opt/maven/sites/org/dthume/couchdb/${project.artifactId}/${project.version}/
       </url>
     </site>
   </distributionManagement>
