@@ -26,6 +26,5 @@
       <item name="Introduction" href="index.html"/>
       <item name="Usage" href="usage.html"/>
     </menu>
-    <menu ref="reports"/>
   </body>
 </project>
