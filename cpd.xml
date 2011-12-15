@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+<duplication lines="40" tokens="231">
+<file line="249" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="368" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<codefragment>
+<![CDATA[
+                append( sb, "Expression: ${couchapp.host}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "password", 2 );
+                append( sb, "The password to use when communicating with the Couch instance.", 3 );
+                append( sb, "Expression: ${couchapp.password}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "port (Default: 5984)", 2 );
+                append( sb, "The port of the Couch instance.", 3 );
+                append( sb, "Expression: ${couchapp.port}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "scriptsDirectory (Default: scripts)", 2 );
+                append( sb, "The directory where JavaScript files are placed, relative to the webappDirectory.", 3 );
+                append( sb, "Expression: ${scripts}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "sourceDirectory (Default: ${basedir}/src/main/couchapp)", 2 );
+                append( sb, "The directory where couchapp sources are stored.", 3 );
+                append( sb, "Expression: ${couchapp.sourceDirectory}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "targetDirectory (Default: ${project.build.directory}/couchapp)", 2 );
+                append( sb, "The directory where couchapps are built to.", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "username", 2 );
+                append( sb, "The username to use when communicating with the Couch instance.", 3 );
+                append( sb, "Expression: ${couchapp.username}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "webappDirectory", 2 );
+                append( sb, "The directory where web application files are built to.", 3 );
+                append( sb, "Expression: ${project.build.directory}/${project.build.finalName}", 3 );
+                append( sb, "", 0 );
+            }
+        }
+
+        if ( getLog().isInfoEnabled() )
+]]>
+</codefragment>
+</duplication>
+<duplication lines="30" tokens="176">
+<file line="160" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="322" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<codefragment>
+<![CDATA[
+            append( sb, "couchdb:package", 0 );
+            append( sb, "Packages a couchapp in preparation for deployment to couch db or an artifact repository.", 1 );
+            append( sb, "", 0 );
+            if ( detail )
+            {
+                append( sb, "Available parameters:", 1 );
+                append( sb, "", 0 );
+
+                append( sb, "scriptsDirectory (Default: scripts)", 2 );
+                append( sb, "The directory where JavaScript files are placed, relative to the webappDirectory.", 3 );
+                append( sb, "Expression: ${scripts}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "sourceDirectory (Default: ${basedir}/src/main/couchapp)", 2 );
+                append( sb, "The directory where couchapp sources are stored.", 3 );
+                append( sb, "Expression: ${couchapp.sourceDirectory}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "targetDirectory (Default: ${project.build.directory}/couchapp)", 2 );
+                append( sb, "The directory where couchapps are built to.", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "webappDirectory", 2 );
+                append( sb, "The directory where web application files are built to.", 3 );
+                append( sb, "Expression: ${project.build.directory}/${project.build.finalName}", 3 );
+                append( sb, "", 0 );
+            }
+        }
+
+        if ( goal == null || goal.length() <= 0 || "push".equals( goal ) )
+]]>
+</codefragment>
+</duplication>
+<duplication lines="29" tokens="168">
+<file line="84" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="161" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="192" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<codefragment>
+<![CDATA[
+            append( sb, "Expands include (!code [FILE]) comments in couch app files", 1 );
+            append( sb, "", 0 );
+            if ( detail )
+            {
+                append( sb, "Available parameters:", 1 );
+                append( sb, "", 0 );
+
+                append( sb, "scriptsDirectory (Default: scripts)", 2 );
+                append( sb, "The directory where JavaScript files are placed, relative to the webappDirectory.", 3 );
+                append( sb, "Expression: ${scripts}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "sourceDirectory (Default: ${basedir}/src/main/couchapp)", 2 );
+                append( sb, "The directory where couchapp sources are stored.", 3 );
+                append( sb, "Expression: ${couchapp.sourceDirectory}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "targetDirectory (Default: ${project.build.directory}/couchapp)", 2 );
+                append( sb, "The directory where couchapps are built to.", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "webappDirectory", 2 );
+                append( sb, "The directory where web application files are built to.", 3 );
+                append( sb, "Expression: ${project.build.directory}/${project.build.finalName}", 3 );
+                append( sb, "", 0 );
+            }
+        }
+
+        if ( goal == null || goal.length() <= 0 || "get-document".equals( goal ) )
+]]>
+</codefragment>
+</duplication>
+<duplication lines="18" tokens="101">
+<file line="88" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="259" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<codefragment>
+<![CDATA[
+                append( sb, "Expression: ${couchapp.port}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "scriptsDirectory (Default: scripts)", 2 );
+                append( sb, "The directory where JavaScript files are placed, relative to the webappDirectory.", 3 );
+                append( sb, "Expression: ${scripts}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "sourceDirectory (Default: ${basedir}/src/main/couchapp)", 2 );
+                append( sb, "The directory where couchapp sources are stored.", 3 );
+                append( sb, "Expression: ${couchapp.sourceDirectory}", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "targetDirectory (Default: ${project.build.directory}/couchapp)", 2 );
+                append( sb, "The directory where couchapps are built to.", 3 );
+                append( sb, "", 0 );
+
+                append( sb, "username", 2 );
+]]>
+</codefragment>
+</duplication>
+</pmd-cpd>

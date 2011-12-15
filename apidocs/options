@@ -1,0 +1,24 @@
+-classpath
+'/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/classes:/var/lib/hudson/.m2/repository/log4j/log4j/1.2.14/log4j-1.2.14.jar:/var/lib/hudson/.m2/repository/org/apache/maven/maven-core/3.0.3/maven-core-3.0.3.jar:/var/lib/hudson/.m2/repository/ro/isdc/wro4j/wro4j-core/1.4.1/wro4j-core-1.4.1.jar:/var/lib/hudson/.m2/repository/com/google/code/jcouchdb/jcouchdb/0.11.0-1/jcouchdb-0.11.0-1.jar:/var/lib/hudson/.m2/repository/org/apache/commons/commons-lang3/3.0.1/commons-lang3-3.0.1.jar:/var/lib/hudson/.m2/repository/org/codehaus/plexus/plexus-classworlds/2.4/plexus-classworlds-2.4.jar:/var/lib/hudson/.m2/repository/org/apache/maven/maven-model-builder/3.0.3/maven-model-builder-3.0.3.jar:/var/lib/hudson/.m2/repository/org/apache/httpcomponents/httpcore/4.1.2/httpcore-4.1.2.jar:/var/lib/hudson/.m2/repository/commons-beanutils/commons-beanutils/1.8.0/commons-beanutils-1.8.0.jar:/var/lib/hudson/.m2/repository/org/sonatype/aether/aether-spi/1.11/aether-spi-1.11.jar:/var/lib/hudson/.m2/repository/org/sonatype/plexus/plexus-sec-dispatcher/1.3/plexus-sec-dispatcher-1.3.jar:/var/lib/hudson/.m2/repository/org/apache/maven/maven-settings/3.0.3/maven-settings-3.0.3.jar:/var/lib/hudson/.m2/repository/org/sonatype/sisu/sisu-inject-bean/2.1.1/sisu-inject-bean-2.1.1.jar:/var/lib/hudson/.m2/repository/org/apache/maven/maven-artifact/3.0.3/maven-artifact-3.0.3.jar:/var/lib/hudson/.m2/repository/commons-io/commons-io/2.1/commons-io-2.1.jar:/var/lib/hudson/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/var/lib/hudson/.m2/repository/org/codehaus/plexus/plexus-utils/2.0.6/plexus-utils-2.0.6.jar:/var/lib/hudson/.m2/repository/org/apache/maven/maven-model/3.0.3/maven-model-3.0.3.jar:/var/lib/hudson/.m2/repository/org/sonatype/aether/aether-impl/1.11/aether-impl-1.11.jar:/var/lib/hudson/.m2/repository/org/sonatype/sisu/sisu-guice/2.9.4/sisu-guice-2.9.4-no_aop.jar:/var/lib/hudson/.m2/repository/org/apache/maven/maven-aether-provider/3.0.3/maven-aether-provider-3.0.3.jar:/var/lib/hudson/.m2/repository/org/apache/maven/maven-settings-builder/3.0.3/maven-settings-builder-3.0.3.jar:/var/lib/hudson/.m2/repository/org/apache/maven/maven-repository-metadata/3.0.3/maven-repository-metadata-3.0.3.jar:/var/lib/hudson/.m2/repository/org/apache/httpcomponents/httpclient/4.1.2/httpclient-4.1.2.jar:/var/lib/hudson/.m2/repository/org/sonatype/plexus/plexus-cipher/1.4/plexus-cipher-1.4.jar:/var/lib/hudson/.m2/repository/org/sonatype/aether/aether-api/1.8/aether-api-1.8.jar:/var/lib/hudson/.m2/repository/org/sonatype/aether/aether-util/1.8/aether-util-1.8.jar:/var/lib/hudson/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar:/var/lib/hudson/.m2/repository/org/slf4j/slf4j-api/1.5.6/slf4j-api-1.5.6.jar:/var/lib/hudson/.m2/repository/com/google/code/svenson/svenson/1.3.7/svenson-1.3.7.jar:/var/lib/hudson/.m2/repository/org/sonatype/sisu/sisu-inject-plexus/2.1.1/sisu-inject-plexus-2.1.1.jar:/var/lib/hudson/.m2/repository/org/apache/maven/maven-plugin-api/3.0.3/maven-plugin-api-3.0.3.jar:/var/lib/hudson/.m2/repository/org/dthume/dthume-shared-resources/0.1-SNAPSHOT/dthume-shared-resources-0.1-SNAPSHOT.jar:/var/lib/hudson/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar:/var/lib/hudson/.m2/repository/org/slf4j/slf4j-log4j12/1.5.6/slf4j-log4j12-1.5.6.jar:/var/lib/hudson/.m2/repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/src/main/java:/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin'
+-author
+-bottom
+'Copyright &#169; 2011. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'CouchDB Maven Plugin 0.2-SNAPSHOT API'
+-linkoffline
+'http://download.oracle.com/javase/6/docs/api' '/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'CouchDB Maven Plugin 0.2-SNAPSHOT API'

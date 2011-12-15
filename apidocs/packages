@@ -1,0 +1,5 @@
+org.dthume.couchdb.util
+org.dthume.couchdb.repository
+org.dthume.couchdb.model
+org.dthume.couchdb.maven.util
+org.dthume.couchdb.maven

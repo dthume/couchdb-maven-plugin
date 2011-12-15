@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<rss version="0.91">
+  <channel>
+    <title>CouchDB Maven Plugin - Checkstyle report</title>
+    <link>https://dthume.github.com/couchdb-maven-plugin/</link>
+    <description>CouchDB Maven Plugin - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2011</copyright>
+    <item>
+      <title>File: 19,
+             Errors: 1147,
+             Warnings: 0,
+             Infos: 0
+      </title>
+            <link>https://dthume.github.com/couchdb-maven-plugin//checkstyle.html</link>
+      <description>
+        <p>Click <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.util.UnaryFunction.java">org/dthume/couchdb/util/UnaryFunction.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.repository.SingleFilePerCouchAppRepository.java">org/dthume/couchdb/repository/SingleFilePerCouchAppRepository.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  318
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.maven.GetDocumentMojo.java">org/dthume/couchdb/maven/GetDocumentMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  102
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.repository.FilesystemCouchAppRepository.java">org/dthume/couchdb/repository/FilesystemCouchAppRepository.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  70
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.maven.util.IOUtil.java">org/dthume/couchdb/maven/util/IOUtil.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  69
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.repository.CouchDBCouchAppRepository.java">org/dthume/couchdb/repository/CouchDBCouchAppRepository.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  89
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.maven.ExpandIncludesMojo.java">org/dthume/couchdb/maven/ExpandIncludesMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  42
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.maven.CompileJSMojo.java">org/dthume/couchdb/maven/CompileJSMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  71
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.maven.AbstractOnlineCouchMojo.java">org/dthume/couchdb/maven/AbstractOnlineCouchMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  8
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.maven.AttachArtifactsMojo.java">org/dthume/couchdb/maven/AttachArtifactsMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  54
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.util.CouchAppVisitor.java">org/dthume/couchdb/util/CouchAppVisitor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  34
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.maven.AbstractCouchMojo.java">org/dthume/couchdb/maven/AbstractCouchMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  50
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.maven.PackageMojo.java">org/dthume/couchdb/maven/PackageMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  18
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.repository.CouchAppRepository.java">org/dthume/couchdb/repository/CouchAppRepository.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  22
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.util.CouchAppWalker.java">org/dthume/couchdb/util/CouchAppWalker.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  18
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.model.CouchAppConstants.java">org/dthume/couchdb/model/CouchAppConstants.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  57
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.maven.PushMojo.java">org/dthume/couchdb/maven/PushMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  34
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.maven.CompressArtifactsMojo.java">org/dthume/couchdb/maven/CompressArtifactsMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  40
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://dthume.github.com/couchdb-maven-plugin//checkstyle.html#org.dthume.couchdb.repository.CompressingSingleFilePerCouchAppRepository.java">org/dthume/couchdb/repository/CompressingSingleFilePerCouchAppRepository.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  46
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+
