@@ -34,7 +34,7 @@
   <scm>
     <connection>scm:git:git://github.com/dthume/${project.artifactId}.git</connection>
     <developerConnection>scm:git:https://dthume@github.com/dthume/${project.artifactId}.git</developerConnection>
-    <url>https://github.com/dthume/${project.artifactId}</url>
+    <url>https://github.com/dthume/${project.artifactId}/</url>
   </scm>
 
   <distributionManagement>
