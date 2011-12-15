@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2011-12-15T23:30:48.437">
+<pmd version="4.2.5" timestamp="2011-12-15T23:38:12.609">
 <file name="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/src/main/java/org/dthume/couchdb/maven/AbstractCouchMojo.java">
 <violation beginline="20" endline="20" begincolumn="1" endcolumn="39" rule="UnusedImports" ruleset="Import Statement Rules" package="org.dthume.couchdb.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
 Avoid unused imports such as 'org.apache.maven.model.Resource'
