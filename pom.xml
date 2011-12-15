@@ -21,7 +21,7 @@
 
   <name>CouchDB Maven Plugin</name>
   <inceptionYear>2011</inceptionYear>
-  <url>https://dthu.me/projects/org/dthume/couchdb/${project.artifactId}/${project.version}/</url>
+  <url>http://dthu.me/projects/org/dthume/couchdb/${project.artifactId}/${project.version}/</url>
 
   <description>
     Tools for interacting with Couch DB from Maven.
