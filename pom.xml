@@ -21,7 +21,7 @@
 
   <name>CouchDB Maven Plugin</name>
   <inceptionYear>2011</inceptionYear>
-  <url>http://dthu.me/projects/org/dthume/couchdb/${project.artifactId}/${project.version}/</url>
+  <url>https://dthume.github.com/couchdb-maven-plugin/</url>
 
   <description>
     Tools for interacting with Couch DB from Maven.
@@ -39,14 +39,12 @@
 
   <distributionManagement>
     <site>
-      <id>couchapp.site</id>
-      <name>Couchapp Maven Website</name>
-      <url>
-        file:///opt/maven/sites/org/dthume/couchdb/${project.artifactId}/${project.version}/
-      </url>
+      <id>dthu.me.web</id>
+      <name>org.dthume Maven Website</name>
+      <url>https://github.com/dthume/${project.artifactId}/</url>
     </site>
   </distributionManagement>
-
+  
   <properties>
     <com.google.code.jcouchdb.version>0.11.0-1</com.google.code.jcouchdb.version>
     <commons-io.version>2.1</commons-io.version>
