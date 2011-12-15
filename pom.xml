@@ -10,7 +10,7 @@
 
   <parent>
     <groupId>org.dthume</groupId>
-    <artifactId>dthume-parent</artifactId>
+    <artifactId>dthume-public</artifactId>
     <version>0.1-SNAPSHOT</version>
   </parent>
 
@@ -127,6 +127,18 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
+        <configuration>
+          <goalPrefix>couchdb</goalPrefix>
+        </configuration>
+        <executions>
+          <execution>
+            <id>generated-helpmojo</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>helpmojo</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
