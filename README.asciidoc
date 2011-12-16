@@ -12,5 +12,5 @@ me, to manage my own couch apps.  Documentation and More Stuff Generally is
 forthcoming. 
 
 Maven generated project sites are available for the latest
-http://dthume.github.com/couchdb-maven-plugin[release] and
-http://dthu.me/projects/couchdb-maven-plugin[snapshot] versions.
+http://dthume.github.com/couchdb-maven-plugin/[release] and
+http://dthu.me/projects/couchdb-maven-plugin/[snapshot] versions.
