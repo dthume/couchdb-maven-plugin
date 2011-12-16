@@ -11,7 +11,7 @@
   <parent>
     <groupId>org.dthume</groupId>
     <artifactId>dthume-public</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
   </parent>
 
   <groupId>org.dthume.couchdb</groupId>
@@ -53,7 +53,6 @@
     <org.apache.commons.commons-lang3.version>3.0.1</org.apache.commons.commons-lang3.version>
     <org.apache.httpcomponents.httpclient.version>4.1.2</org.apache.httpcomponents.httpclient.version>
     <org.apache.maven.version>3.0.3</org.apache.maven.version>
-    <org.dthume.dthume-docbook.version>0.1-SNAPSHOT</org.dthume.dthume-docbook.version>
     <org.sonatype.aether.version>1.8</org.sonatype.aether.version>
     <ro.isdc.wro4j.version>1.4.1</ro.isdc.wro4j.version>
   </properties>
