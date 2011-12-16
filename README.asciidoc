@@ -11,5 +11,6 @@ Seriously though, it's currently in alpha, and has only really been used, by
 me, to manage my own couch apps.  Documentation and More Stuff Generally is
 forthcoming. 
 
-The Maven generated project site can be found:
-http://dthume.github.com/couchdb-maven-plugin[here]
+Maven generated project sites are available for the latest
+http://dthume.github.com/couchdb-maven-plugin[release] and
+http://dthu.me/projects/couchdb-maven-plugin[snapshot] versions.
