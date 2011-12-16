@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2011-12-15T23:49:42.707">
-<file name="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/src/main/java/org/dthume/couchdb/maven/AbstractCouchMojo.java">
+<pmd version="4.2.5" timestamp="2011-12-16T01:31:39.641">
+<file name="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/src/main/java/org/dthume/couchdb/maven/AbstractCouchMojo.java">
 <violation beginline="20" endline="20" begincolumn="1" endcolumn="39" rule="UnusedImports" ruleset="Import Statement Rules" package="org.dthume.couchdb.maven" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
 Avoid unused imports such as 'org.apache.maven.model.Resource'
 </violation>
 </file>
-<file name="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/src/main/java/org/dthume/couchdb/repository/FilesystemCouchAppRepository.java">
+<file name="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/src/main/java/org/dthume/couchdb/repository/FilesystemCouchAppRepository.java">
 <violation beginline="17" endline="141" begincolumn="1" endcolumn="3" rule="TooManyStaticImports" ruleset="Import Statement Rules" package="org.dthume.couchdb.repository" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#TooManyStaticImports" priority="3">
 Too many static imports may lead to messy code
 </violation>
 </file>
-<file name="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/src/main/java/org/dthume/couchdb/util/CouchAppWalker.java">
+<file name="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/src/main/java/org/dthume/couchdb/util/CouchAppWalker.java">
 <violation beginline="19" endline="19" begincolumn="1" endcolumn="66" rule="UnusedImports" ruleset="Import Statement Rules" package="org.dthume.couchdb.util" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
 Avoid unused imports such as 'org.dthume.couchdb.util.CouchAppVisitor.Status.SKIP'
 </violation>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pmd-cpd>
 <duplication lines="40" tokens="231">
-<file line="249" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
-<file line="368" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="249" path="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="368" path="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
 <codefragment>
 <![CDATA[
                 append( sb, "Expression: ${couchapp.host}", 3 );
@@ -49,8 +49,8 @@
 </codefragment>
 </duplication>
 <duplication lines="30" tokens="176">
-<file line="160" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
-<file line="322" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="160" path="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="322" path="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
 <codefragment>
 <![CDATA[
             append( sb, "couchdb:package", 0 );
@@ -87,9 +87,9 @@
 </codefragment>
 </duplication>
 <duplication lines="29" tokens="168">
-<file line="84" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
-<file line="161" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
-<file line="192" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="84" path="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="161" path="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="192" path="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
 <codefragment>
 <![CDATA[
             append( sb, "Expands include (!code [FILE]) comments in couch app files", 1 );
@@ -125,8 +125,8 @@
 </codefragment>
 </duplication>
 <duplication lines="18" tokens="101">
-<file line="88" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
-<file line="259" path="/var/lib/hudson/jobs/couchdb-maven-plugin/workspace/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="88" path="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
+<file line="259" path="/var/lib/hudson/jobs/Release_couchdb-maven-plugin/workspace/target/checkout/target/generated-sources/plugin/org/dthume/couchdb/maven/HelpMojo.java"/>
 <codefragment>
 <![CDATA[
                 append( sb, "Expression: ${couchapp.port}", 3 );
