@@ -26,9 +26,12 @@
     <author email="dth@dthu.me">David Thomas Hume</author>
   </properties>
   <body>
-    <release version="0.2" date="2011-11-18">
+    <release version="0.2" date="2011-12-16">
+      <action dev="dth" type="update">
+        Project moved under org.dthume group
+      </action>
       <action dev="dth" type="add">
-        Support for compression / compilation of JS files using WRO4J.
+        Basic support for compression / compilation of JS files using WRO4J.
       </action>
     </release>
     <release version="0.1" date="2011-11-16"
