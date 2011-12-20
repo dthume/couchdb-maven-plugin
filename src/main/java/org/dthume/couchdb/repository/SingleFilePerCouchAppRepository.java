@@ -32,103 +32,95 @@ import org.jcouchdb.document.DesignDocument;
 import org.svenson.JSON;
 import org.svenson.JSONParser;
 
-public class SingleFilePerCouchAppRepository
-	implements CouchAppRepository {
-	
-	public final static String DEFAULT_EXTENSION = ".couchapp";
-	
-	private final File baseDir;
-	private final String[] extensions = new String[] { "couchapp" };
-	
-	public SingleFilePerCouchAppRepository(File baseDir) {
-		this.baseDir = baseDir;
-	}
+public class SingleFilePerCouchAppRepository implements CouchAppRepository {
 
-	public Collection<String> listIds() {
-		final Collection<File> files = listFiles(baseDir, extensions, false); 
-		final Collection<String> names = new java.util.ArrayList<String>();
-		for (final File file : files)
-			names.add(toAppId(file));
-		return names;
-	}
-	
-	private String toAppId(final File file)
-	{
-		final String name = file.getName();
-		return name.substring(0, name.lastIndexOf('.'));
-	}
+    public final static String DEFAULT_EXTENSION = ".couchapp";
 
-	public DesignDocument create(DesignDocument app) {
-		return update(app);
-	}
-	
-	public File getFile(String id) {
-		return new File(baseDir, id + DEFAULT_EXTENSION);
-	}
+    private final File baseDir;
+    private final String[] extensions = new String[] { "couchapp" };
 
-	public DesignDocument retrieve(String id) {
-		try {
-			return read(id);
-		}
-		catch (IOException e) {
-			throw new IllegalArgumentException("error reading app with id: " + id, e);
-		}
-	}
+    public SingleFilePerCouchAppRepository(File baseDir) {
+        this.baseDir = baseDir;
+    }
 
-	public DesignDocument update(DesignDocument app) {
-		try {
-			write(app);
-		}
-		catch (IOException e) {
-			throw new IllegalArgumentException("error writing app with id: " + toId(app), e);
-		}
-		return app;
-	}
+    public Collection<String> listIds() {
+        final Collection<File> files = listFiles(baseDir, extensions, false);
+        final Collection<String> names = new java.util.ArrayList<String>();
+        for (final File file : files)
+            names.add(toAppId(file));
+        return names;
+    }
 
-	public boolean delete(DesignDocument app) {
-		final String name = toId(app) + DEFAULT_EXTENSION;
-		return new File(baseDir, name).delete();
-	}
-	
-	private JSON getJSON() { return JSON.defaultJSON(); }
-	
-	private JSONParser getJSONParser() {
-		return JSONParser.defaultJSONParser();
-	}
-	
-	protected DesignDocument read(final String id)
-		throws IOException {
-		final String json = IOUtils.toString(getInputStream(id));
-		final DesignDocument doc =
-				getJSONParser().parse(DesignDocument.class, json);
-		doc.setId("_design/" + id);
-		return doc;
-	}
-	
-	protected void write(final DesignDocument app)
-		throws IOException {
-		baseDir.mkdirs();
-		final OutputStream out = getOutputStream(toId(app));
-		final Writer writer = new java.io.OutputStreamWriter(out);
-		try
-		{
-			getJSON().writeJSONToWriter(app, writer);
-		}
-		finally
-		{
-			if (null != writer) IOUtils.closeQuietly(writer);
-		}
-	}
-	
-	protected OutputStream getOutputStream(final String id)
-		throws IOException
-	{
-		return new FileOutputStream(new File(baseDir, id + DEFAULT_EXTENSION));
-	}
-	
-	protected InputStream getInputStream(final String id)
-			throws IOException
-	{
-		return new FileInputStream(new File(baseDir, id + DEFAULT_EXTENSION));
-	}
+    private String toAppId(final File file) {
+        final String name = file.getName();
+        return name.substring(0, name.lastIndexOf('.'));
+    }
+
+    public DesignDocument create(DesignDocument app) {
+        return update(app);
+    }
+
+    public File getFile(String id) {
+        return new File(baseDir, id + DEFAULT_EXTENSION);
+    }
+
+    public DesignDocument retrieve(String id) {
+        try {
+            return read(id);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("error reading app with id: "
+                    + id, e);
+        }
+    }
+
+    public DesignDocument update(DesignDocument app) {
+        try {
+            write(app);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("error writing app with id: "
+                    + toId(app), e);
+        }
+        return app;
+    }
+
+    public boolean delete(DesignDocument app) {
+        final String name = toId(app) + DEFAULT_EXTENSION;
+        return new File(baseDir, name).delete();
+    }
+
+    private JSON getJSON() {
+        return JSON.defaultJSON();
+    }
+
+    private JSONParser getJSONParser() {
+        return JSONParser.defaultJSONParser();
+    }
+
+    protected DesignDocument read(final String id) throws IOException {
+        final String json = IOUtils.toString(getInputStream(id));
+        final DesignDocument doc = getJSONParser().parse(DesignDocument.class,
+                json);
+        doc.setId("_design/" + id);
+        return doc;
+    }
+
+    protected void write(final DesignDocument app) throws IOException {
+        baseDir.mkdirs();
+        final OutputStream out = getOutputStream(toId(app));
+        final Writer writer = new java.io.OutputStreamWriter(out);
+        try {
+            getJSON().writeJSONToWriter(app, writer);
+        } finally {
+            if (null != writer)
+                IOUtils.closeQuietly(writer);
+        }
+    }
+
+    protected OutputStream getOutputStream(final String id) throws IOException {
+        return new FileOutputStream(new File(baseDir, id + DEFAULT_EXTENSION));
+    }
+
+    protected InputStream getInputStream(final String id) throws IOException {
+        return new FileInputStream(new File(baseDir, id + DEFAULT_EXTENSION));
+    }
 }

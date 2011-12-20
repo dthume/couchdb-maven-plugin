@@ -26,44 +26,39 @@ import org.dthume.couchdb.repository.SingleFilePerCouchAppRepository;
  * Attaches packaged couchapps to the current project.
  *
  * @author dth
- * 
+ *
  * @goal attach-artifacts
  * @requiresProject true
  */
-public class AttachArtifactsMojo extends AbstractCouchMojo
-{
+public class AttachArtifactsMojo extends AbstractCouchMojo {
     /**
      * @parameter expression="${project}"
      * @required
      * @readonly
      */
     private MavenProject project;
-    
+
     /**
      * @component
      * @readonly
      */
     private MavenProjectHelper projectHelper;
-    
+
     private SingleFilePerCouchAppRepository inputRepo;
-  
-    protected void postConstruct()
-    {
-    	inputRepo =
-    	        new SingleFilePerCouchAppRepository(getArtifactDir());
-    }
-    
-    public void execute() throws MojoExecutionException
-    {
-    	postConstruct();
-    	
-    	for (final String app : inputRepo.listIds())
-    		attachArtifact(app);
+
+    protected void postConstruct() {
+        inputRepo = new SingleFilePerCouchAppRepository(getArtifactDir());
     }
 
-    private void attachArtifact(final String id)
-    {
-    	final File file = inputRepo.getFile(id);
-    	projectHelper.attachArtifact(project, "couchapp", id, file);
+    public void execute() throws MojoExecutionException {
+        postConstruct();
+
+        for (final String app : inputRepo.listIds())
+            attachArtifact(app);
+    }
+
+    private void attachArtifact(final String id) {
+        final File file = inputRepo.getFile(id);
+        projectHelper.attachArtifact(project, "couchapp", id, file);
     }
 }

@@ -24,7 +24,7 @@ import org.dthume.couchdb.repository.SingleFilePerCouchAppRepository;
 import org.jcouchdb.document.DesignDocument;
 
 /**
- * Standalone goal which pushes one or more couch apps to Couch DB
+ * Standalone goal which pushes one or more couch apps to Couch DB.
  * 
  * @author dth
  * 
@@ -32,7 +32,7 @@ import org.jcouchdb.document.DesignDocument;
  * @goal push
  * @requiresDirectInvocation true
  */
-public class PushMojo extends AbstractOnlineCouchMojo {
+public final class PushMojo extends AbstractOnlineCouchMojo {
     private CouchAppRepository inputRepo;
 
     private CouchAppRepository outputRepo;
@@ -43,15 +43,18 @@ public class PushMojo extends AbstractOnlineCouchMojo {
     }
 
     @Override
-    protected CouchAppRepository getSourceRepo() { return inputRepo; }
+    protected CouchAppRepository getSourceRepo() {
+        return inputRepo;
+    }
 
     @Override
-    protected CouchAppRepository getTargetRepo() { return outputRepo; }
+    protected CouchAppRepository getTargetRepo() {
+        return outputRepo;
+    }
 
     @Override
     protected DesignDocument processInternal(DesignDocument design) {
-        final DesignDocument current =
-                getOrCreateDesignDocument(toId(design));
+        final DesignDocument current = getOrCreateDesignDocument(toId(design));
 
         if (!isBlank(current.getRevision()))
             design.setRevision(current.getRevision());
@@ -65,7 +68,9 @@ public class PushMojo extends AbstractOnlineCouchMojo {
             final DesignDocument current = outputRepo.retrieve(application);
             design.setRevision(current.getRevision());
         } catch (Exception e) {
-            getLog().error("Caught exception while retrieving current version of application: " + application, e);
+            getLog().error(
+                    "Caught exception while retrieving current version of application: "
+                            + application, e);
         }
 
         return design;

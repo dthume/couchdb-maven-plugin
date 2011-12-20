@@ -24,64 +24,52 @@ import org.svenson.JSON;
 
 /**
  * Standalone goal which gets a document from Couch DB
- *
+ * 
  * @author dth
- *
+ * 
  * @goal get-document
  * @requiresProject false
  * @requiresDirectInvocation true
  */
-public class GetDocumentMojo extends AbstractOnlineCouchMojo
-{
+public class GetDocumentMojo extends AbstractOnlineCouchMojo {
     /**
      * @parameter expression="${couchapp.documentId}"
      * @required
      */
     private String documentId;
-    
+
     /**
      * @parameter expression="${couchapp.file}" default-value="-"
      * @required
      */
     private String outputFile;
-	
-    public void execute() throws MojoExecutionException
-    {
-    	try
-    	{
-    	    executeInternal();
-    	}
-    	catch (IOException e)
-    	{
-    		throw new MojoExecutionException("Caught IOException during mojo execution", e);
-    	}
+
+    public void execute() throws MojoExecutionException {
+        try {
+            executeInternal();
+        } catch (IOException e) {
+            throw new MojoExecutionException(
+                    "Caught IOException during mojo execution", e);
+        }
     }
-    
-    private void executeInternal() throws IOException
-    {
-    	final PrintStream output = getOutputStream();
-    	final Object document = getDocument();
-    	
-    	writeJSON(document, output);
+
+    private void executeInternal() throws IOException {
+        final PrintStream output = getOutputStream();
+        final Object document = getDocument();
+
+        writeJSON(document, output);
     }
-    
-    private Object getDocument()
-    {
-    	return getDatabase().getDocument(Map.class, documentId);
+
+    private Object getDocument() {
+        return getDatabase().getDocument(Map.class, documentId);
     }
-    
-    private PrintStream getOutputStream() throws IOException
-    {
-    	return "-".equals(outputFile) ?
-    			System.out : new PrintStream(outputFile);
+
+    private PrintStream getOutputStream() throws IOException {
+        return "-".equals(outputFile) ?
+                System.out : new PrintStream(outputFile);
     }
-    
-    private void writeJSON(Object document, PrintStream output)
-    {
-    	output.println(
-    	        JSON.formatJSON(
-        		JSON.defaultJSON().forValue(document)
-        	)
-        );
+
+    private void writeJSON(Object document, PrintStream output) {
+        output.println(JSON.formatJSON(JSON.defaultJSON().forValue(document)));
     }
 }

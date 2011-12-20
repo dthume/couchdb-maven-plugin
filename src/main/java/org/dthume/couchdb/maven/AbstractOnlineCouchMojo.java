@@ -68,11 +68,17 @@ public abstract class AbstractOnlineCouchMojo extends AbstractCouchMojo {
      */
     private String password;
 
-    protected Database getDatabase() {
+    /**
+     * @return the database connection configured for this execution
+     */
+    protected final Database getDatabase() {
         return new Database(getServer(), database);
     }
 
-    protected Server getServer() {
+    /**
+     * @return the server configuration for this execution
+     */
+    protected final Server getServer() {
         final ServerImpl server = new ServerImpl(host, port);
         if (!StringUtils.isBlank(username)) {
             final Credentials creds =

@@ -18,26 +18,22 @@ package org.dthume.couchdb.maven.util;
 import java.io.File;
 import java.io.FilenameFilter;
 
-public class IOUtil
-{
-	private IOUtil() {}
-	
-	public static Iterable<File> iterateDirectories(final File dir)
-    {
-    	final String[] names = dir.list(new FilenameFilter()
-    	{
-			public boolean accept(File dir, String name)
-			{
-				return new File(dir, name).isDirectory();
-			}
-    	});
-    	
-    	final java.util.List<File> directories =
-    		new java.util.ArrayList<File>(names.length);
-    	
-    	for (final String name : names)
-    		directories.add(new File(dir, name));
-    	
-    	return directories;
+public final class IOUtil {
+    private IOUtil() { }
+
+    public static Iterable<File> iterateDirectories(final File dir) {
+        final String[] names = dir.list(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return new File(dir, name).isDirectory();
+            }
+        });
+
+        final java.util.List<File> directories = new java.util.ArrayList<File>(
+                names.length);
+
+        for (final String name : names)
+            directories.add(new File(dir, name));
+
+        return directories;
     }
 }

@@ -22,22 +22,20 @@ import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-public class CompressingSingleFilePerCouchAppRepository
-	extends SingleFilePerCouchAppRepository {
-	
-	public CompressingSingleFilePerCouchAppRepository(File baseDir) {
-		super(baseDir);
-	}
+public class CompressingSingleFilePerCouchAppRepository extends
+        SingleFilePerCouchAppRepository {
 
-	@Override
-	protected OutputStream getOutputStream(String id)
-			throws IOException {
-		return new GZIPOutputStream(super.getOutputStream(id));
-	}
+    public CompressingSingleFilePerCouchAppRepository(File baseDir) {
+        super(baseDir);
+    }
 
-	@Override
-	protected InputStream getInputStream(String id)
-			throws IOException {
-		return new GZIPInputStream(super.getInputStream(id));
-	}
+    @Override
+    protected OutputStream getOutputStream(String id) throws IOException {
+        return new GZIPOutputStream(super.getOutputStream(id));
+    }
+
+    @Override
+    protected InputStream getInputStream(String id) throws IOException {
+        return new GZIPInputStream(super.getInputStream(id));
+    }
 }

@@ -21,34 +21,33 @@ import org.dthume.couchdb.model.CouchAppConstants;
 import org.jcouchdb.db.Database;
 import org.jcouchdb.document.DesignDocument;
 
-public class CouchDBCouchAppRepository
-	implements CouchAppRepository {
+public class CouchDBCouchAppRepository implements CouchAppRepository {
 
-	private Database database;
-	
-	public CouchDBCouchAppRepository(final Database database) {
-		this.database = database;
-	}
-	
-	public Collection<String> listIds() {
-		return java.util.Collections.emptyList();
-	}
+    private Database database;
 
-	public DesignDocument create(DesignDocument app) {
-		return update(app);
-	}
+    public CouchDBCouchAppRepository(final Database database) {
+        this.database = database;
+    }
 
-	public DesignDocument retrieve(String id) {
-		return database.getDesignDocument(id);
-	}
+    public Collection<String> listIds() {
+        return java.util.Collections.emptyList();
+    }
 
-	public DesignDocument update(DesignDocument app) {
-		database.createOrUpdateDocument(app);
-		return database.getDesignDocument(CouchAppConstants.toId(app));
-	}
+    public DesignDocument create(DesignDocument app) {
+        return update(app);
+    }
 
-	public boolean delete(DesignDocument app) {
-		database.delete(app);
-		return true;
-	}
+    public DesignDocument retrieve(String id) {
+        return database.getDesignDocument(id);
+    }
+
+    public DesignDocument update(DesignDocument app) {
+        database.createOrUpdateDocument(app);
+        return database.getDesignDocument(CouchAppConstants.toId(app));
+    }
+
+    public boolean delete(DesignDocument app) {
+        database.delete(app);
+        return true;
+    }
 }

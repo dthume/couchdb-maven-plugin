@@ -1,4 +1,3 @@
-
 /**
  * Copyright (C) 2011 David Thomas Hume <dth@dthu.me>
  *
@@ -22,6 +21,8 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import static org.dthume.couchdb.maven.util.IOUtil.iterateDirectories;
 import static org.dthume.couchdb.model.CouchAppConstants.toId;
+import static org.dthume.couchdb.model.CouchAppConstants.MAP_FILE;
+import static org.dthume.couchdb.model.CouchAppConstants.REDUCE_FILE;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,8 +95,13 @@ public class FilesystemCouchAppRepository implements CouchAppRepository {
         }.execute();
     }
 
-    private void write(DesignDocument doc) throws IOException {
+    private void write(final DesignDocument doc) throws IOException {
         final File app = new File(baseDir, toId(doc));
+        writeViews(app, doc);
+    }
+
+    private void writeViews(final File app, final DesignDocument doc)
+            throws IOException {
         final File views = new File(app, CouchAppConstants.VIEWS_FILE);
         views.mkdirs();
         for (final Map.Entry<String, View> entry : doc.getViews().entrySet())
@@ -129,13 +135,14 @@ public class FilesystemCouchAppRepository implements CouchAppRepository {
     }
 
     private View readView(final File viewFile) throws IOException {
-        final File mapFile = new File(viewFile, CouchAppConstants.MAP_FILE);
-        final File reduceFile = new File(viewFile,
-                CouchAppConstants.REDUCE_FILE);
-        final String map = mapFile.exists() ? readFileToString(mapFile) : "";
-        final String reduce = reduceFile.exists() ? readFileToString(reduceFile)
-                : "";
+        final String map = safeReadFileToString(new File(viewFile, MAP_FILE));
+        final String reduce = safeReadFileToString(new File(viewFile,
+                REDUCE_FILE));
         return new View(map, reduce);
+    }
+
+    private String safeReadFileToString(final File f) throws IOException {
+        return (null != f && f.exists()) ? readFileToString(f) : "";
     }
 
 }

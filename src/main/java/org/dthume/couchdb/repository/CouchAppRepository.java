@@ -20,9 +20,13 @@ import java.util.Collection;
 import org.jcouchdb.document.DesignDocument;
 
 public interface CouchAppRepository {
-	Collection<String> listIds();
-	DesignDocument create(DesignDocument app);
-	DesignDocument retrieve(String id);
-	DesignDocument update(DesignDocument app);
-	boolean delete(DesignDocument app);
+    Collection<String> listIds();
+
+    DesignDocument create(DesignDocument app);
+
+    DesignDocument retrieve(String id);
+
+    DesignDocument update(DesignDocument app);
+
+    boolean delete(DesignDocument app);
 }

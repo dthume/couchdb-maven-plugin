@@ -17,18 +17,16 @@ package org.dthume.couchdb.model;
 
 import org.jcouchdb.document.DesignDocument;
 
-public class CouchAppConstants
-{
-	private CouchAppConstants() { }
-	
-	public final static String MAP_FILE = "map.js";
-	public final static String REDUCE_FILE = "reduce.js";
-	
-	public final static String VIEWS_FILE = "views";
-	
-	public static String toId(DesignDocument doc)
-	{
-		final String id = doc.getId();
-		return id.substring(id.indexOf("/") + 1);
-	}
+public final class CouchAppConstants {
+    private CouchAppConstants() { }
+
+    public final static String MAP_FILE = "map.js";
+    public final static String REDUCE_FILE = "reduce.js";
+
+    public final static String VIEWS_FILE = "views";
+
+    public static String toId(DesignDocument doc) {
+        final String id = doc.getId();
+        return id.substring(id.indexOf("/") + 1);
+    }
 }

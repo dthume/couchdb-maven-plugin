@@ -20,30 +20,31 @@ import org.dthume.couchdb.repository.CouchAppRepository;
 import org.dthume.couchdb.repository.SingleFilePerCouchAppRepository;
 
 /**
- * Packages a couchapp in preparation for deployment to couch db or an
- * artifact repository.
- *
+ * Packages a couchapp in preparation for deployment to couch db or an artifact
+ * repository.
+ * 
  * @author dth
  * 
  * @goal compress-artifacts
  */
-public class CompressArtifactsMojo extends AbstractCouchMojo
-{
+public final class CompressArtifactsMojo extends AbstractCouchMojo {
     private CouchAppRepository inputRepo;
     private CouchAppRepository outputRepo;
-    
+
     @Override
-	protected CouchAppRepository getSourceRepo() { return inputRepo; }
+    protected CouchAppRepository getSourceRepo() {
+        return inputRepo;
+    }
 
-	@Override
-	protected CouchAppRepository getTargetRepo() { return outputRepo; }
+    @Override
+    protected CouchAppRepository getTargetRepo() {
+        return outputRepo;
+    }
 
-	@Override
-	protected void postConstruct()
-    {
-    	inputRepo =
-    		new SingleFilePerCouchAppRepository(getPackagedDir());
-    	outputRepo =
-        	new CompressingSingleFilePerCouchAppRepository(getArtifactDir());
+    @Override
+    protected void postConstruct() {
+        inputRepo = new SingleFilePerCouchAppRepository(getPackagedDir());
+        outputRepo =
+            new CompressingSingleFilePerCouchAppRepository(getArtifactDir());
     }
 }

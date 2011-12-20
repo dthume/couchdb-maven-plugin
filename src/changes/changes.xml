@@ -26,6 +26,9 @@
     <author email="dth@dthu.me">David Thomas Hume</author>
   </properties>
   <body>
+    <release version="0.3" date="TODO">
+      <!-- TODO -->
+    </release>
     <release version="0.2" date="2011-12-16">
       <action dev="dth" type="update">
         Project moved under org.dthume group

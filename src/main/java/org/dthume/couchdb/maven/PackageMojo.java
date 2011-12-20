@@ -28,18 +28,22 @@ import org.dthume.couchdb.repository.SingleFilePerCouchAppRepository;
  * @goal package
  */
 public class PackageMojo extends AbstractCouchMojo {
-    
+
     private CouchAppRepository inputRepo;
     private CouchAppRepository outputRepo;
 
     @Override
-    protected CouchAppRepository getSourceRepo() { return inputRepo; }
+    protected final CouchAppRepository getSourceRepo() {
+        return inputRepo;
+    }
 
     @Override
-    protected CouchAppRepository getTargetRepo() { return outputRepo; }
+    protected final CouchAppRepository getTargetRepo() {
+        return outputRepo;
+    }
 
     @Override
-    protected void postConstruct() {
+    protected final void postConstruct() {
         inputRepo = new FilesystemCouchAppRepository(getCompiledDir());
         outputRepo = new SingleFilePerCouchAppRepository(getPackagedDir());
     }

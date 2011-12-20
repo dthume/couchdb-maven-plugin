@@ -20,6 +20,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -38,12 +39,12 @@ import ro.isdc.wro.model.resource.processor.ResourcePostProcessor;
 
 /**
  * Compress the JavaScript used for view / show etc. functions.
- * 
+ *
  * @author dth
- * 
+ *
  * @goal compile-js
  */
-public class CompileJSMojo extends AbstractCouchMojo {
+public final class CompileJSMojo extends AbstractCouchMojo {
 
     private ResourcePostProcessor postProcessor;
 
@@ -51,29 +52,30 @@ public class CompileJSMojo extends AbstractCouchMojo {
     private CouchAppRepository outputRepo;
 
     /**
-     * Whether or not to compile JavaScript files
-     * 
-     * @parameter expression = "${couchapp.skipCompilation}" default-value =
-     *            false
+     * Whether or not to compile JavaScript files.
+     *
+     * @parameter
+     *  expression="${couchapp.skipCompilation}"
+     *  default-value=false
      */
     private boolean skipCompilation = false;
 
     /**
-     * Whether or not to compile JavaScript files
-     * 
-     * @parameter expression = "${project.build.sourceEncoding}"
+     * Whether or not to compile JavaScript files.
+     *
+     * @parameter expression="${project.build.sourceEncoding}"
      */
     private String sourceEncoding = "UTF-8";
-    
+
     /**
-     * Compiler processor class
-     * 
+     * Compiler processor class.
+     *
      * @parameter
-     *  expression = "${couchdb.compilerProcessorClass}"
-     *  default-value = "ro.isdc.wro.model.resource.processor.impl.js.JSMinProcessor"
+     *  expression="${couchdb.compilerProcessorClass}"
+     *  default-value="ro.isdc.wro.model.resource.processor.impl.js.JSMinProcessor"
      */
     private String processorClass;
-    
+
     @Override
     protected CouchAppRepository getSourceRepo() {
         return inputRepo;
@@ -100,19 +102,18 @@ public class CompileJSMojo extends AbstractCouchMojo {
         context.setConfig(config);
 
         Context.set(context);
-        
+
         initPostProcessor();
     }
-    
+
     private void initPostProcessor() {
         final ClassLoader cl = Thread.currentThread().getContextClassLoader();
-        try
-        {
+        try {
             final Class<?> clazz = Class.forName(processorClass, true, cl);
             final Reflector reflector = new Reflector();
             final Object[] args = new Object[] {};
-            postProcessor =
-                (ResourcePostProcessor)reflector.newInstance(clazz, args);
+            postProcessor = (ResourcePostProcessor) reflector.newInstance(
+                    clazz, args);
         } catch (ClassNotFoundException e) {
             postProcessor = new ResourcePostProcessor() {
                 public void process(final Reader reader, final Writer writer)
@@ -127,28 +128,41 @@ public class CompileJSMojo extends AbstractCouchMojo {
     }
 
     @Override
-    protected DesignDocument processInternal(DesignDocument doc)
+    protected DesignDocument processInternal(final DesignDocument input)
             throws MojoExecutionException {
-        doc = super.processInternal(doc);
+        final DesignDocument doc = super.processInternal(input);
 
         if (!skipCompilation) {
             getLog().debug("Compiling JS in design document: " + doc.getId());
 
-            for (Map.Entry<String, View> entry : doc.getViews().entrySet())
-                compileView(entry.getValue());
+            compileFilters(doc);
+            compileViews(doc);
         }
 
         return doc;
     }
 
-    private void compileView(View view) {
+    private void compileViews(final DesignDocument doc) {
+        for (Map.Entry<String, View> entry : doc.getViews().entrySet())
+            compileView(entry.getValue());
+    }
+
+    private void compileView(final View view) {
         view.setMap(compileJS(view.getMap()));
         view.setReduce(compileJS(view.getReduce()));
     }
 
-    private final static String JS_PREFIX = "var __couchapp_anon_function__=";
+    private void compileFilters(final DesignDocument doc) {
+        final Map<String, String> source = doc.getFilterFunctions();
+        final Map<String, String> result = new HashMap<String, String>();
+        for (Map.Entry<String, String> entry : source.entrySet())
+            result.put(entry.getKey(), compileJS(entry.getValue()));
+        doc.setFilterFunctions(result);
+    }
 
-    private String compileJS(String js) {
+    private static final String JS_PREFIX = "var __couchapp_anon_function__=";
+
+    private String compileJS(final String js) {
         if (StringUtils.isBlank(js))
             return js;
 
@@ -157,7 +171,7 @@ public class CompileJSMojo extends AbstractCouchMojo {
         try {
             final StringReader reader = new StringReader(JS_PREFIX + js);
             final StringWriter writer = new StringWriter();
-            
+
             postProcessor.process(reader, writer);
             result = writer.toString();
             result = result.substring(result.indexOf("=") + 1);

@@ -32,7 +32,7 @@ import org.jcouchdb.document.DesignDocument;
 import org.jcouchdb.document.View;
 
 /**
- * Expands include (!code [FILE]) comments in couch app files
+ * Expands include (!code [FILE]) comments in couch app files.
  * 
  * @author dth
  * 
@@ -43,7 +43,7 @@ public class ExpandIncludesMojo extends AbstractCouchMojo {
     private CouchAppRepository outputRepo;
 
     protected void postConstruct() {
-        inputRepo = new FilesystemCouchAppRepository(sourceDirectory);
+        inputRepo = new FilesystemCouchAppRepository(getSourceDir());
         outputRepo = new FilesystemCouchAppRepository(getExpandedDir());
     }
 
@@ -70,12 +70,14 @@ public class ExpandIncludesMojo extends AbstractCouchMojo {
         }
     }
 
-    private void expandAppIncludes(final DesignDocument doc) throws IOException {
+    private void expandAppIncludes(final DesignDocument doc)
+            throws IOException {
         for (final Map.Entry<String, View> entry : doc.getViews().entrySet())
             expandIncludeReferences(entry.getValue());
     }
 
-    private void expandIncludeReferences(final View view) throws IOException {
+    private void expandIncludeReferences(final View view)
+            throws IOException {
         view.setMap(expandIncludeReferences(view.getMap()));
         view.setReduce(expandIncludeReferences(view.getReduce()));
     }
@@ -83,7 +85,8 @@ public class ExpandIncludesMojo extends AbstractCouchMojo {
     private final static Pattern INCLUDES_PATTERN = Pattern.compile(
             "^\\s*//\\s*!code\\s+([^\\s]+)\\s*$", Pattern.MULTILINE);
 
-    private String expandIncludeReferences(final String js) throws IOException {
+    private String expandIncludeReferences(final String js)
+            throws IOException {
         if (null == js)
             return js;
 
@@ -102,7 +105,7 @@ public class ExpandIncludesMojo extends AbstractCouchMojo {
     }
 
     private String readInclude(String include) throws IOException {
-        final File base = new File(webappDirectory, scriptsDirectory);
+        final File base = getScriptsDir();
         return readFileToString(new File(base, include));
     }
 }

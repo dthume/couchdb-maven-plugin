@@ -17,7 +17,6 @@ package org.dthume.couchdb.maven;
 
 import java.io.File;
 
-import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.dthume.couchdb.repository.CouchAppRepository;
@@ -31,7 +30,6 @@ import org.svenson.JSON;
  * @author dth
  */
 public abstract class AbstractCouchMojo extends AbstractMojo {
-    
     /**
      * The directory where couchapp sources are stored.
      *
@@ -39,14 +37,14 @@ public abstract class AbstractCouchMojo extends AbstractMojo {
      *  expression = "${couchapp.sourceDirectory}"
      *  default-value = "${basedir}/src/main/couchapp"
      */
-    protected File sourceDirectory;
+    private File sourceDirectory;
 
     /**
      * The directory where couchapps are built to.
      *
      * @parameter default-value = "${project.build.directory}/couchapp"
      */
-    protected File targetDirectory;
+    private File targetDirectory;
 
     /**
      * The directory where web application files are built to.
@@ -54,7 +52,7 @@ public abstract class AbstractCouchMojo extends AbstractMojo {
      * @parameter
      *  expression = "${project.build.directory}/${project.build.finalName}"
      */
-    protected File webappDirectory;
+    private File webappDirectory;
 
     /**
      * The directory where JavaScript files are placed, relative to the
@@ -64,7 +62,7 @@ public abstract class AbstractCouchMojo extends AbstractMojo {
      *  expression = "${scripts}"
      *  default-value = "scripts"
      */
-    protected String scriptsDirectory;
+    private String scriptsDirectory;
 
     public void execute() throws MojoExecutionException {
         postConstruct();
@@ -88,7 +86,7 @@ public abstract class AbstractCouchMojo extends AbstractMojo {
         return doc;
     }
 
-    protected File getTargetDir(final String relative) {
+    protected final File getTargetDir(final String relative) {
         return new File(targetDirectory, relative);
     }
 
@@ -97,6 +95,9 @@ public abstract class AbstractCouchMojo extends AbstractMojo {
     protected final File getExpandedDir() { return getTargetDir("expanded"); }
     protected final File getSourceDir() { return sourceDirectory; }
     protected final File getPackagedDir() { return getTargetDir("packaged"); }
+    protected final File getScriptsDir() {
+        return new File(webappDirectory, scriptsDirectory);
+    }
 
     protected JSON getJSON() { return JSON.defaultJSON(); }
 }
