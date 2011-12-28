@@ -26,10 +26,10 @@
 			</implementation>
 			<configuration>
 				<phases>
-					<process-resources>
+          <process-resources>
             org.apache.maven.plugins:maven-resources-plugin:resources
           </process-resources>
-					<compile>
+          <compile>
 					  org.codehaus.mojo.javascript:javascript-maven-plugin:war-package,
 					  org.dthume.couchdb:couchdb-maven-plugin:expand-includes,
 					  org.dthume.couchdb:couchdb-maven-plugin:compile-js
