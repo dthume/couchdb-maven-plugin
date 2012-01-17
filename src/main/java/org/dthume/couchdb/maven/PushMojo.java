@@ -28,7 +28,6 @@ import org.jcouchdb.document.DesignDocument;
  * 
  * @author dth
  * 
- * @execute phase="package"
  * @goal push
  * @requiresDirectInvocation true
  */
