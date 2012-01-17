@@ -24,7 +24,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.svenson.JSONParser;
 
 /**
- * Standalone goal which gets a document from Couch DB
+ * Standalone goal which puts a document into Couch DB
  * 
  * @author dth
  * 
@@ -34,12 +34,16 @@ import org.svenson.JSONParser;
  */
 public class PutDocumentMojo extends AbstractOnlineCouchMojo {
     /**
+     * The id of the document
+     * 
      * @parameter expression="${couchapp.documentId}"
      * @required
      */
     private String documentId;
 
     /**
+     * The file to put.
+     * 
      * @parameter expression="${couchapp.file}"
      */
     private File inputFile;
@@ -58,7 +62,10 @@ public class PutDocumentMojo extends AbstractOnlineCouchMojo {
         final Map<String, Object> source = getSource();
         
         if (null != existing) {
+            source.put("_id", existing.get("_id"));
             source.put("_revision", existing.get("_revision"));
+        } else {
+            source.put("_id", documentId);
         }
         
         getDatabase().createOrUpdateDocument(source);
