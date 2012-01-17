@@ -62,11 +62,10 @@ public class PutDocumentMojo extends AbstractOnlineCouchMojo {
         final Map<String, Object> source = getSource();
         
         if (null != existing) {
-            source.put("_id", existing.get("_id"));
             source.put("_revision", existing.get("_revision"));
-        } else {
-            source.put("_id", documentId);
         }
+        
+        source.put("_id", documentId);
         
         getDatabase().createOrUpdateDocument(source);
     }
@@ -74,8 +73,9 @@ public class PutDocumentMojo extends AbstractOnlineCouchMojo {
     @SuppressWarnings("unchecked")
     private Map<String, Object> getDocument() {
         try {
-            final Object d = getDatabase().getDocument(Map.class, documentId); 
-            return (Map<String, Object>)d;
+            final Object document =
+                getDatabase().getDocument(Map.class, documentId); 
+            return (Map<String, Object>)document;
         }
         catch (RuntimeException e) {
             return null;
