@@ -31,7 +31,7 @@ import org.jcouchdb.document.DesignDocument;
  * @goal push
  * @requiresDirectInvocation true
  */
-public final class PushMojo extends AbstractOnlineCouchMojo {
+public final class PushMojo extends AbstractOnlineJSProcessingCouchMojo {
     private CouchAppRepository inputRepo;
 
     private CouchAppRepository outputRepo;

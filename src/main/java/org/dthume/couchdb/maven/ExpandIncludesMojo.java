@@ -38,7 +38,7 @@ import org.jcouchdb.document.View;
  * 
  * @goal expand-includes
  */
-public class ExpandIncludesMojo extends AbstractCouchMojo {
+public class ExpandIncludesMojo extends AbstractJSProcessingCouchMojo {
     private CouchAppRepository inputRepo;
     private CouchAppRepository outputRepo;
 

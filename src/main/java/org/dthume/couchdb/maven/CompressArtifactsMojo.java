@@ -27,7 +27,7 @@ import org.dthume.couchdb.repository.SingleFilePerCouchAppRepository;
  * 
  * @goal compress-artifacts
  */
-public final class CompressArtifactsMojo extends AbstractCouchMojo {
+public final class CompressArtifactsMojo extends AbstractJSProcessingCouchMojo {
     private CouchAppRepository inputRepo;
     private CouchAppRepository outputRepo;
 

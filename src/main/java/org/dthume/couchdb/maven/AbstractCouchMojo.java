@@ -64,28 +64,6 @@ public abstract class AbstractCouchMojo extends AbstractMojo {
      */
     private String scriptsDirectory;
 
-    public void execute() throws MojoExecutionException {
-        postConstruct();
-        final CouchAppRepository inputRepo = getSourceRepo();
-        final CouchAppRepository outputRepo = getTargetRepo();
-        for (final String id : inputRepo.listIds()) {
-            DesignDocument app = inputRepo.retrieve(id);
-            app = processInternal(app);
-            outputRepo.update(app);
-        }
-    }
-
-    protected void postConstruct() { }
-
-    protected CouchAppRepository getSourceRepo() { return null; }
-
-    protected CouchAppRepository getTargetRepo() { return null; }
-
-    protected DesignDocument processInternal(DesignDocument doc)
-            throws MojoExecutionException {
-        return doc;
-    }
-
     protected final File getTargetDir(final String relative) {
         return new File(targetDirectory, relative);
     }

@@ -44,7 +44,7 @@ import ro.isdc.wro.model.resource.processor.ResourcePostProcessor;
  *
  * @goal compile-js
  */
-public final class CompileJSMojo extends AbstractCouchMojo {
+public final class CompileJSMojo extends AbstractJSProcessingCouchMojo {
 
     private ResourcePostProcessor postProcessor;
 

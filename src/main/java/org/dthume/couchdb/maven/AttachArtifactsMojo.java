@@ -30,7 +30,7 @@ import org.dthume.couchdb.repository.SingleFilePerCouchAppRepository;
  * @goal attach-artifacts
  * @requiresProject true
  */
-public class AttachArtifactsMojo extends AbstractCouchMojo {
+public class AttachArtifactsMojo extends AbstractJSProcessingCouchMojo {
     /**
      * @parameter expression="${project}"
      * @required

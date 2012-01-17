@@ -27,7 +27,7 @@ import org.dthume.couchdb.repository.SingleFilePerCouchAppRepository;
  * 
  * @goal package
  */
-public class PackageMojo extends AbstractCouchMojo {
+public class PackageMojo extends AbstractJSProcessingCouchMojo {
 
     private CouchAppRepository inputRepo;
     private CouchAppRepository outputRepo;
