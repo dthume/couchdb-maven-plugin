@@ -45,6 +45,7 @@ public class PutDocumentMojo extends AbstractOnlineCouchMojo {
      * The file to put.
      * 
      * @parameter expression="${couchapp.file}"
+     * @required
      */
     private File inputFile;
 
