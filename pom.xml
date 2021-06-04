@@ -51,7 +51,7 @@
     <javax.servlet.servlet-api.version>2.5</javax.servlet.servlet-api.version>
     <junit.version>3.8.1</junit.version>
     <org.apache.commons.commons-lang3.version>3.0.1</org.apache.commons.commons-lang3.version>
-    <org.apache.httpcomponents.httpclient.version>4.1.2</org.apache.httpcomponents.httpclient.version>
+    <org.apache.httpcomponents.httpclient.version>4.5.13</org.apache.httpcomponents.httpclient.version>
     <org.apache.maven.version>3.0.3</org.apache.maven.version>
     <org.sonatype.aether.version>1.8</org.sonatype.aether.version>
   </properties>
